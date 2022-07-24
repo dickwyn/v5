@@ -1,6 +1,3 @@
-import rehypeHighlight from 'rehype-highlight';
-import remarkFrontmatter from 'remark-frontmatter';
-
 /**
  * @type {import('next').NextConfig}
  */
