@@ -31,7 +31,7 @@ const PostPage = ({ source, frontMatter }: BlogProps): JSX.Element => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   const postFilePath = path.join(CONTENT_PATH, `${params.slug}.mdx`);
   const source = fs.readFileSync(postFilePath);
 
