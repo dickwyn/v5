@@ -1,17 +1,12 @@
-import type { GetStaticProps, NextPage } from 'next';
+import type { GetStaticProps } from 'next';
 
 import styles from '../styles/Home.module.css';
 
-const Home: NextPage = () => {
-  return <div className={styles.container}>hi, i'm dickwyn</div>;
-};
+const Home = (): JSX.Element => <div className={styles.container}>hi, i&apos;m dickwyn</div>;
 
-export const getStaticProps: GetStaticProps = async () => {
-  // TODO return blog entries
-
-  return {
-    props: {},
-  };
-};
+// TODO return blog entries
+export const getStaticProps: GetStaticProps = async () => ({
+  props: {},
+});
 
 export default Home;
