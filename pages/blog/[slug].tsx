@@ -1,4 +1,4 @@
-import { CONTENT_PATH, FILE_PATH_LIST } from '../../api/blog';
+import { CONTENT_PATH, FILE_PATH_LIST } from '../../utils/constants';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { BlogProps } from '../../types/blog';
