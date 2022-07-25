@@ -1,9 +1,9 @@
-import styles from '../styles/Home.module.css';
+import Layout from '../components/layout';
 
-const About = (): JSX.Element => (
-  <div className={styles.container}>
+const AboutPage = (): JSX.Element => (
+  <Layout>
     <h1>about</h1>
-  </div>
+  </Layout>
 );
 
-export default About;
+export default AboutPage;

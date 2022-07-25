@@ -9,22 +9,25 @@ import path from 'path';
 import { serialize } from 'next-mdx-remote/serialize';
 import { BlogProps } from '../../types/blog';
 import { CONTENT_PATH, FILE_PATH_LIST } from '../../utils/constants';
+import Layout from '../../components/layout';
 
 const PostPage = ({ source, frontMatter }: BlogProps): JSX.Element => (
-  <article>
-    <p>{JSON.stringify(frontMatter)}</p>
-    <hr />
-    <div className="prose dark:prose-dark">
-      <MDXRemote
-        {...source}
-        components={{
-          Head,
-          Image,
-          Link,
-        }}
-      />
-    </div>
-  </article>
+  <Layout>
+    <article>
+      <p>{JSON.stringify(frontMatter)}</p>
+      <hr />
+      <div className="prose dark:prose-dark">
+        <MDXRemote
+          {...source}
+          components={{
+            Head,
+            Image,
+            Link,
+          }}
+        />
+      </div>
+    </article>
+  </Layout>
 );
 
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {

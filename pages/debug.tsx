@@ -1,9 +1,9 @@
-import styles from '../styles/Home.module.css';
+import Layout from '../components/layout';
 
-const Debug = (): JSX.Element => (
-  <div className={styles.container}>
+const DebugPage = (): JSX.Element => (
+  <Layout>
     <h1>debug</h1>
-  </div>
+  </Layout>
 );
 
-export default Debug;
+export default DebugPage;

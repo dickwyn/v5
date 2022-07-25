@@ -1,9 +1,9 @@
-import styles from '../styles/Home.module.css';
+import Layout from '../components/layout';
 
-const Uses = (): JSX.Element => (
-  <div className={styles.container}>
+const UsesPage = (): JSX.Element => (
+  <Layout>
     <h1>uses</h1>
-  </div>
+  </Layout>
 );
 
-export default Uses;
+export default UsesPage;
