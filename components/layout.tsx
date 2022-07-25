@@ -14,7 +14,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => (
     </a>
     <Header />
     <div id="content" />
-    <main>{children}</main>
+    <main className="wrapper">{children}</main>
     <Footer />
   </>
 );
