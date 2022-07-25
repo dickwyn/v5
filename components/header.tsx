@@ -4,6 +4,9 @@ import Brightness2TwoToneIcon from '@mui/icons-material/Brightness2TwoTone';
 import LightModeTwoToneIcon from '@mui/icons-material/LightModeTwoTone';
 import { nanoid } from 'nanoid';
 import Link from 'next/link';
+import Image from 'next/image';
+import LogoDark from '../images/brand/logo-dark.svg';
+import LogoLight from '../images/brand/logo-light.svg';
 
 const NAV_LINKS = [
   {
@@ -45,11 +48,14 @@ const Header = (): JSX.Element => {
     <header>
       <div className="wrapper">
         <div className="content-container">
-          <div className="dark-mode-toggle-container">
-            <IconButton aria-label="Toggle automatic/light/dark mode" onClick={darkMode.toggle}>
-              {darkMode.value ? <Brightness2TwoToneIcon /> : <LightModeTwoToneIcon />}
-            </IconButton>
-          </div>
+          <Link href="/" className="home">
+            <Image
+              src={darkMode.value ? LogoDark : LogoLight}
+              width="500"
+              height="500"
+              alt="dickwyn's icon"
+            />
+          </Link>
           <nav role="navigation">
             <ul>
               {NAV_LINKS.map((item) => (
@@ -62,6 +68,11 @@ const Header = (): JSX.Element => {
                 </li>
               ))}
             </ul>
+            <div className="dark-mode-toggle-container">
+              <IconButton aria-label="Toggle automatic/light/dark mode" onClick={darkMode.toggle}>
+                {darkMode.value ? <Brightness2TwoToneIcon /> : <LightModeTwoToneIcon />}
+              </IconButton>
+            </div>
           </nav>
         </div>
       </div>
