@@ -1,3 +1,7 @@
+import useDarkMode from '@fisch0920/use-dark-mode';
+import IconButton from '@mui/material/IconButton';
+import Brightness2TwoToneIcon from '@mui/icons-material/Brightness2TwoTone';
+import LightModeTwoToneIcon from '@mui/icons-material/LightModeTwoTone';
 import { nanoid } from 'nanoid';
 import Link from 'next/link';
 
@@ -34,26 +38,33 @@ const NAV_LINKS = [
   },
 ];
 
-const Header = (): JSX.Element => (
-  <header>
-    <div className="wrapper">
-      <div className="content-container">
-        <nav role="navigation">
-          <ul>
-            {NAV_LINKS.map((item) => (
-              <li key={item.id}>
-                {item.internal ? (
-                  <Link href={item.path}>{item.name}</Link>
-                ) : (
-                  <a href={item.path}>{item.name}</a>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
+const Header = (): JSX.Element => {
+  const darkMode = useDarkMode();
+
+  return (
+    <header>
+      <div className="wrapper">
+        <div className="content-container">
+          <IconButton aria-label="Toggle automatic/light/dark mode" onClick={darkMode.toggle}>
+            {darkMode.value ? <Brightness2TwoToneIcon /> : <LightModeTwoToneIcon />}
+          </IconButton>
+          <nav role="navigation">
+            <ul>
+              {NAV_LINKS.map((item) => (
+                <li key={item.id}>
+                  {item.internal ? (
+                    <Link href={item.path}>{item.name}</Link>
+                  ) : (
+                    <a href={item.path}>{item.name}</a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       </div>
-    </div>
-  </header>
-);
+    </header>
+  );
+};
 
 export default Header;
