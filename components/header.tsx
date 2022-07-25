@@ -45,9 +45,11 @@ const Header = (): JSX.Element => {
     <header>
       <div className="wrapper">
         <div className="content-container">
-          <IconButton aria-label="Toggle automatic/light/dark mode" onClick={darkMode.toggle}>
-            {darkMode.value ? <Brightness2TwoToneIcon /> : <LightModeTwoToneIcon />}
-          </IconButton>
+          <div className="dark-mode-toggle-container">
+            <IconButton aria-label="Toggle automatic/light/dark mode" onClick={darkMode.toggle}>
+              {darkMode.value ? <Brightness2TwoToneIcon /> : <LightModeTwoToneIcon />}
+            </IconButton>
+          </div>
           <nav role="navigation">
             <ul>
               {NAV_LINKS.map((item) => (

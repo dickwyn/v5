@@ -1,3 +1,6 @@
+@import 'theme.scss';
+@import 'variables.scss';
+
 html,
 body {
   padding: 0;
@@ -7,10 +10,11 @@ body {
 }
 
 body {
-  &.dark-mode {
-    background-color: #000;
-    color: #fff;
-  }
+  background-color: var(--background);
+  color: var(--text);
+  animation: mte 1.5s 0s forwards ease-in-out;
+  transition: background 0.39s cubic-bezier(0.17, 0.67, 0.83, 0.67),
+    color 0.69s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 
 a {
@@ -68,5 +72,20 @@ a.a11y-skip-link {
     z-index: 999;
     text-align: center;
     transition: opacity 0.2s ease-in;
+  }
+}
+
+// TODO move to scoped scss file
+.dark-mode-toggle-container {
+  button {
+    color: var(--text-secondary);
+
+    &:hover {
+      color: var(--text);
+    }
+
+    &.MuiIconButton-root {
+      padding: var(--header-icon-padding);
+    }
   }
 }
