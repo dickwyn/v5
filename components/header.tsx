@@ -5,38 +5,23 @@ import LightModeTwoToneIcon from '@mui/icons-material/LightModeTwoTone';
 import { nanoid } from 'nanoid';
 import Link from 'next/link';
 import Image from 'next/image';
-import LogoDark from '../images/brand/logo-dark.svg';
 import LogoLight from '../images/brand/logo-light.svg';
+import LogoDark from '../images/brand/logo-dark.svg';
 
 const NAV_LINKS = [
   {
     id: nanoid(),
-    name: 'about',
-    path: '/about',
-    internal: true,
-  },
-  {
-    id: nanoid(),
     name: 'blog',
-    path: '/blog',
     internal: true,
   },
   {
     id: nanoid(),
     name: 'things',
-    path: '/things',
     internal: true,
   },
   {
     id: nanoid(),
-    name: 'projects',
-    path: '/projects',
-    internal: true,
-  },
-  {
-    id: nanoid(),
-    name: 'gear',
-    path: '/uses',
+    name: 'uses',
     internal: true,
   },
 ];
@@ -46,36 +31,23 @@ const Header = (): JSX.Element => {
 
   return (
     <header>
-      <div className="wrapper">
-        <div className="content-container">
-          <Link href="/" className="home">
-            <Image
-              src={darkMode.value ? LogoDark : LogoLight}
-              width="500"
-              height="500"
-              alt="dickwyn's icon"
-            />
-          </Link>
-          <nav role="navigation">
-            <ul>
-              {NAV_LINKS.map((item) => (
-                <li key={item.id}>
-                  {item.internal ? (
-                    <Link href={item.path}>{item.name}</Link>
-                  ) : (
-                    <a href={item.path}>{item.name}</a>
-                  )}
-                </li>
-              ))}
-            </ul>
-            <div className="dark-mode-toggle-container">
-              <IconButton aria-label="Toggle automatic/light/dark mode" onClick={darkMode.toggle}>
-                {darkMode.value ? <Brightness2TwoToneIcon /> : <LightModeTwoToneIcon />}
-              </IconButton>
-            </div>
-          </nav>
+      <Link href="/" className="home">
+        <Image src={darkMode.value ? LogoDark : LogoLight} height="9" alt="dickwyn's icon" />
+      </Link>
+      <nav role="navigation">
+        <ul>
+          {NAV_LINKS.map(({ id, name, internal }) => (
+            <li key={id}>
+              {internal ? <Link href={name}>{name}</Link> : <a href={name}>{name}</a>}
+            </li>
+          ))}
+        </ul>
+        <div className="dark-mode-toggle-container">
+          <IconButton aria-label="Toggle automatic/light/dark mode" onClick={darkMode.toggle}>
+            {darkMode.value ? <Brightness2TwoToneIcon /> : <LightModeTwoToneIcon />}
+          </IconButton>
         </div>
-      </div>
+      </nav>
     </header>
   );
 };
