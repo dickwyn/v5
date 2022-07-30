@@ -57,15 +57,6 @@ header,
 footer {
   padding: var(--vertical-padding) var(--horizontal-padding);
   align-items: center;
-
-  a {
-    color: var(--text-secondary);
-    font-weight: 500;
-    margin: 0;
-    text-decoration: none;
-    text-transform: lowercase;
-    font-size: 1.2rem;
-  }
 }
 
 main {
@@ -187,7 +178,7 @@ header {
 footer {
   a {
     &:not(:last-child) {
-      padding-right: var(--horizontal-padding);
+      margin-right: var(--horizontal-padding);
     }
   }
 }

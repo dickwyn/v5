@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import LogoLight from '../images/brand/logo-light.svg';
 import LogoDark from '../images/brand/logo-dark.svg';
+import SpecialLink from './specialLink';
 
 const NAV_LINKS = [
   {
@@ -42,13 +43,7 @@ const Header = (): JSX.Element => {
         <ul>
           {NAV_LINKS.map(({ id, name, internal }) => (
             <li key={id}>
-              {internal ? (
-                <Link href={name}>
-                  <a>{name}</a>
-                </Link>
-              ) : (
-                <a href={name}>{name}</a>
-              )}
+              {internal ? <SpecialLink href={name} label={name} /> : <a href={name}>{name}</a>}
             </li>
           ))}
         </ul>
