@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "predev": "npx generate-favicons --source images/brand/icon-dark.svg --destination ./public",
+    "dev": "yarn predev && next dev",
+    "prebuild": "npx generate-favicons --source images/brand/icon-dark.svg --destination ./public",
+    "build": "yarn prebuild && next build",
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
@@ -40,6 +42,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
+    "modern-favicons": "^1.0.3",
     "prettier": "^2.6.1",
     "sass": "^1.54.0",
     "typescript": "^4.7.4"
