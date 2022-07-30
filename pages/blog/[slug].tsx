@@ -11,11 +11,12 @@ import { BlogProps } from '../../types/blog';
 import { CONTENT_PATH, FILE_PATH_LIST } from '../../utils/constants';
 import Layout from '../../components/layout';
 
-const PostPage = ({ source, frontMatter }: BlogProps): JSX.Element => (
+const PostPage = ({ source, frontMatter: { title, author, date } }: BlogProps): JSX.Element => (
   <Layout>
     <article>
-      <p>{JSON.stringify(frontMatter)}</p>
-      <hr />
+      <h1>{title}</h1>
+      <h2>{author}</h2>
+      <h2>{date}</h2>
       <div className="prose dark:prose-dark">
         <MDXRemote
           {...source}
