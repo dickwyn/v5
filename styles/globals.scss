@@ -3,17 +3,9 @@
 
 html,
 body {
+  height: 100%;
   padding: 0;
   margin: 0;
-  // font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-  //   Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  // font-family: 'Noto Sans', sans-serif;
-  font-family: 'Exo 2', sans-serif;
-  line-height: 2;
-  letter-spacing: 2;
-  // font-family: 'Poppins', sans-serif;
-  // font-family: 'Raleway', sans-serif;
-  height: 100%;
 }
 
 body {
@@ -22,52 +14,12 @@ body {
   animation: mte 1.5s 0s forwards ease-in-out;
   transition: background 0.39s cubic-bezier(0.17, 0.67, 0.83, 0.67),
     color 0.69s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  font-family: 'Exo 2', sans-serif;
 }
 
 a {
   color: inherit;
   text-decoration: none;
-
-  color: var(--text-secondary);
-  font-weight: 500;
-  margin: 0;
-  text-decoration: none;
-  text-transform: lowercase;
-  font-size: 1.2rem;
-
-  &.a11y-skip-link {
-    & {
-      left: -999px;
-      position: absolute;
-      top: auto;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      z-index: -999;
-    }
-
-    &:focus,
-    &:active {
-      position: relative;
-      display: inline-block;
-      background: var(--background);
-      color: var(--accent);
-      width: 100%;
-      height: auto;
-      left: 0;
-      top: 0;
-      border: 0.25rem solid var(--accent);
-      padding: 1rem;
-      font-size: 1.4em;
-      z-index: 999;
-      text-align: center;
-      transition: opacity 0.2s ease-in;
-    }
-  }
-}
-
-* {
-  box-sizing: border-box;
 }
 
 main,
@@ -101,17 +53,88 @@ footer {
   }
 }
 
-// TODO move to scoped scss file
-.dark-mode-toggle-container {
-  button {
+header,
+footer {
+  padding: var(--vertical-padding) var(--horizontal-padding);
+  align-items: center;
+
+  a {
     color: var(--text-secondary);
+    font-weight: 500;
+    margin: 0;
+    text-decoration: none;
+    text-transform: lowercase;
+    font-size: 1.2rem;
+  }
+}
 
-    &:hover {
-      color: var(--text);
-    }
+main {
+  font-family: 'IBM Plex Sans', sans-serif;
 
-    &.MuiIconButton-root {
-      padding: var(--header-icon-padding);
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Exo 2', sans-serif;
+  }
+
+  p,
+  li {
+    font-size: 1rem;
+    line-height: 1.68rem;
+  }
+
+  h1 {
+    font-size: var(--h1-size);
+  }
+
+  h2 {
+    font-size: var(--h2-size);
+  }
+
+  h3 {
+    font-size: var(--h3-size);
+    font-style: italic;
+  }
+
+  h4 {
+    font-size: var(--h4-size);
+  }
+
+  h5 {
+    font-size: var(--h5-size);
+    font-style: italic;
+  }
+
+  h6 {
+    font-size: var(--h6-size);
+  }
+
+  small,
+  .text_small {
+    font-size: 0.8em;
+  }
+
+  ol,
+  ul {
+    li {
+      margin-bottom: 0.6rem;
+
+      ol,
+      ul {
+        margin-top: 0.6rem;
+      }
+
+      span {
+        margin-right: 0.5rem;
+      }
+
+      p {
+        display: inline-block;
+        margin: 0 0 0.6rem;
+      }
     }
   }
 }
@@ -125,10 +148,10 @@ header {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    height: 100%;
     width: 100%;
     max-width: 1920px;
     margin: 0 auto;
-    height: 100%;
 
     ul {
       list-style: none;
@@ -144,6 +167,20 @@ header {
         margin: 0 1rem 0 0;
       }
     }
+
+    .dark-mode-toggle-container {
+      button {
+        color: var(--text-secondary);
+
+        &:hover {
+          color: var(--text);
+        }
+
+        &.MuiIconButton-root {
+          padding: var(--header-icon-padding);
+        }
+      }
+    }
   }
 }
 
@@ -153,9 +190,4 @@ footer {
       padding-right: var(--horizontal-padding);
     }
   }
-}
-
-header,
-footer {
-  padding: var(--vertical-padding) var(--horizontal-padding);
 }

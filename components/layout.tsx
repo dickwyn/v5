@@ -1,6 +1,7 @@
 import Footer from './footer';
 import Header from './header';
 import Meta from './meta';
+import styles from '../styles/Layout.module.scss';
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[];
@@ -9,7 +10,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps): JSX.Element => (
   <>
     <Meta />
-    <a className="a11y-skip-link" href="#content">
+    <a className={styles.a11ySkipLink} href="#content">
       Skip to Main Content
     </a>
     <Header />
