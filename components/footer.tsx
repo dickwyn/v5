@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid';
-import IconButton from '@mui/material/IconButton';
 
 const SOCIAL_LINKS = [
   {
@@ -21,24 +20,11 @@ const SOCIAL_LINKS = [
 
 const Footer = (): JSX.Element => (
   <footer>
-    <div className="wrapper">
-      <div className="content-container">
-        <div className="right">
-          {SOCIAL_LINKS.map((item) => (
-            <IconButton
-              key={item.id}
-              size="small"
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${item.name} profile`}
-            >
-              {item.name.toLowerCase()}
-            </IconButton>
-          ))}
-        </div>
-      </div>
-    </div>
+    {SOCIAL_LINKS.map(({ id, name, url }) => (
+      <a key={id} href={url}>
+        {name.toLowerCase()}
+      </a>
+    ))}
   </footer>
 );
 

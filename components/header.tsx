@@ -31,9 +31,11 @@ const Header = (): JSX.Element => {
 
   return (
     <header>
-      <Link href="/" className="home">
-        <Image src={darkMode.value ? LogoDark : LogoLight} height="9" alt="dickwyn's icon" />
-      </Link>
+      <div className="logo">
+        <Link href="/blog">
+          <Image src={darkMode.value ? LogoDark : LogoLight} alt="dickwyn's icon" />
+        </Link>
+      </div>
       <nav role="navigation">
         <ul>
           {NAV_LINKS.map(({ id, name, internal }) => (
