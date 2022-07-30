@@ -19,12 +19,14 @@ const SOCIAL_LINKS = [
 ];
 
 const Footer = (): JSX.Element => (
-  <footer>
-    {SOCIAL_LINKS.map(({ id, name, url }) => (
-      <a key={id} href={url}>
-        {name.toLowerCase()}
-      </a>
-    ))}
+  <footer className="wrapper">
+    <div className="left">
+      {SOCIAL_LINKS.map(({ id, name, url }) => (
+        <a key={id} href={url}>
+          {name.toLowerCase()}
+        </a>
+      ))}
+    </div>
   </footer>
 );
 

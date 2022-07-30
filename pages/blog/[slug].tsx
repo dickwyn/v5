@@ -14,7 +14,7 @@ import Layout from '../../components/layout';
 const PostPage = ({ source, frontMatter }: BlogProps): JSX.Element => (
   <Layout>
     <article>
-      <p>{JSON.stringify(frontMatter)}</p>
+      {/* <p>{JSON.stringify(frontMatter)}</p> */}
       <hr />
       <div className="prose dark:prose-dark">
         <MDXRemote

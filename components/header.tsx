@@ -30,8 +30,8 @@ const Header = (): JSX.Element => {
   const darkMode = useDarkMode();
 
   return (
-    <header>
-      <div className="logo">
+    <header className="wrapper">
+      <div className="left logo">
         <Link href="/">
           <a>
             <Image src={darkMode.value ? LogoDark : LogoLight} alt="dickwyn's icon" />
