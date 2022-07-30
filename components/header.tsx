@@ -32,15 +32,23 @@ const Header = (): JSX.Element => {
   return (
     <header>
       <div className="logo">
-        <Link href="/blog">
-          <Image src={darkMode.value ? LogoDark : LogoLight} alt="dickwyn's icon" />
+        <Link href="/">
+          <a>
+            <Image src={darkMode.value ? LogoDark : LogoLight} alt="dickwyn's icon" />
+          </a>
         </Link>
       </div>
       <nav role="navigation">
         <ul>
           {NAV_LINKS.map(({ id, name, internal }) => (
             <li key={id}>
-              {internal ? <Link href={name}>{name}</Link> : <a href={name}>{name}</a>}
+              {internal ? (
+                <Link href={name}>
+                  <a>{name}</a>
+                </Link>
+              ) : (
+                <a href={name}>{name}</a>
+              )}
             </li>
           ))}
         </ul>
