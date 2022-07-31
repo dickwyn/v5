@@ -43,7 +43,11 @@ const Header = (): JSX.Element => {
         <ul>
           {NAV_LINKS.map(({ id, name, internal }) => (
             <li key={id}>
-              {internal ? <SpecialLink href={name} label={name} /> : <a href={name}>{name}</a>}
+              {internal ? (
+                <SpecialLink href={`/${name}`} label={name} />
+              ) : (
+                <a href={name}>{name}</a>
+              )}
             </li>
           ))}
         </ul>
