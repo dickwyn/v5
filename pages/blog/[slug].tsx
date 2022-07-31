@@ -3,13 +3,12 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote';
-import fs from 'fs';
-import matter from 'gray-matter';
-import path from 'path';
+
 import { serialize } from 'next-mdx-remote/serialize';
+import fs from 'fs';
 import { BlogProps } from '../../types/blog';
-import { CONTENT_PATH, FILE_PATH_LIST } from '../../utils/constants';
 import Layout from '../../components/layout';
+import { getPostBySlug, POSTS_PATH } from '../../lib/blog';
 
 const PostPage = ({ source, frontMatter: { title, author, date } }: BlogProps): JSX.Element => (
   <Layout>
@@ -31,31 +30,31 @@ const PostPage = ({ source, frontMatter: { title, author, date } }: BlogProps): 
   </Layout>
 );
 
-export const getStaticProps: GetStaticProps = async ({ params }: any) => {
-  const postFilePath = path.join(CONTENT_PATH, `${params.slug}.mdx`);
-  const source = fs.readFileSync(postFilePath);
-
-  const { content, data } = matter(source);
+export const getStaticProps: GetStaticProps = async ({ params: { slug } }: any) => {
+  const { content, frontMatter } = getPostBySlug(slug);
 
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [],
       rehypePlugins: [],
     },
-    scope: data,
+    scope: frontMatter,
   });
 
   return {
     props: {
+      frontMatter,
       source: mdxSource,
-      frontMatter: data,
     },
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: FILE_PATH_LIST.map((filePath: string) => filePath.replace(/\.mdx?$/, '')) // Remove file extensions for page paths
-    .map((slug: string) => ({ params: { slug } })), // Map the path into the static paths object required by Next.js,
+  paths: fs
+    .readdirSync(POSTS_PATH)
+    .filter((contentPath) => /\.mdx?$/.test(contentPath))
+    .map((filePath: string) => filePath.replace(/\.mdx?$/, ''))
+    .map((slug: string) => ({ params: { slug } })),
   fallback: false,
 });
 

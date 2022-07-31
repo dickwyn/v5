@@ -2,10 +2,10 @@ import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 export interface BlogProps {
   source: MDXRemoteSerializeResult;
-  frontMatter: Frontmatter;
+  frontMatter: FrontMatter;
 }
 
-export interface Frontmatter {
+export interface FrontMatter {
   templateKey?: string;
   author: string;
   title: string;
@@ -14,4 +14,5 @@ export interface Frontmatter {
   featured: boolean;
   featuredImage: string;
   tagList: string[];
+  slug: string;
 }

@@ -17,12 +17,8 @@ const BlogPage = (props: any): JSX.Element => (
   </Layout>
 );
 
-export const getStaticProps: GetStaticProps = async () => {
-  const posts = getAllPosts(['date', 'description', 'slug', 'title']);
-
-  return {
-    props: { posts },
-  };
-};
+export const getStaticProps: GetStaticProps = async () => ({
+  props: { posts: getAllPosts() },
+});
 
 export default BlogPage;
