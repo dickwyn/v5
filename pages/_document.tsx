@@ -7,7 +7,7 @@ import Document, {
   NextScript,
 } from 'next/document';
 
-const DEBUG_CSS = true;
+const DEBUG_CSS = false;
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
