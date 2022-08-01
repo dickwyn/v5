@@ -3,7 +3,7 @@
 import Layout from '../components/layout';
 
 const StyleGuidePage = (): JSX.Element => (
-  <Layout>
+  <Layout title="Style Guide">
     <div className="wrapper">
       <div className="content-container with-padding">
         <p>

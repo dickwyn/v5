@@ -1,7 +1,7 @@
 import Layout from '../components/layout';
 
 const UsesPage = (): JSX.Element => (
-  <Layout>
+  <Layout title="Uses">
     <h1>uses</h1>
   </Layout>
 );

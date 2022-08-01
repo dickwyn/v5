@@ -7,7 +7,7 @@ import StandardLink from '../../components/standardLink';
 import { getAllPosts } from '../../lib/blog';
 
 const BlogPage = (props: any): JSX.Element => (
-  <Layout>
+  <Layout title="Blog">
     <h1>blog</h1>
     {props.posts.map(({ slug, title }: any) => (
       <Fragment key={slug}>

@@ -11,7 +11,7 @@ import Layout from '../../components/layout';
 import { getPostBySlug, POSTS_PATH } from '../../lib/blog';
 
 const PostPage = ({ source, frontMatter: { title, author, date } }: BlogProps): JSX.Element => (
-  <Layout>
+  <Layout title={title}>
     <article>
       <h1>{title}</h1>
       <h2>{author}</h2>
