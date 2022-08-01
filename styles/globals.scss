@@ -141,6 +141,11 @@ main {
 header {
   .logo {
     width: 69px;
+
+    // to horizontally align logo with nav links
+    & > a > span {
+      top: 1px;
+    }
   }
 
   nav {
