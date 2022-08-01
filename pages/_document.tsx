@@ -7,6 +7,8 @@ import Document, {
   NextScript,
 } from 'next/document';
 
+const DEBUG_CSS = true;
+
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
     const initialProps = await Document.getInitialProps(ctx);
@@ -37,7 +39,7 @@ class MyDocument extends Document {
           <link rel="apple-touch-icon" href="/favicon-apple-touch.png" />
           <link rel="manifest" href="/manifest.json" />
         </Head>
-        <body>
+        <body className={DEBUG_CSS ? 'debug' : ''}>
           {/* as recommended by library https://github.com/transitive-bullshit/use-dark-mode#nextjs */}
           {/* eslint-disable-next-line @next/next/no-sync-scripts */}
           <script src="noflash.js" />

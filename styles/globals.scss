@@ -195,3 +195,12 @@ footer {
     }
   }
 }
+
+// used in conjunction with DEBUG_CSS in _document.tsx
+body.debug {
+  header,
+  main,
+  footer {
+    border: 1px solid var(--accent);
+  }
+}
