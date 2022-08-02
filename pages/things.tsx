@@ -1,5 +1,17 @@
 import Layout from '../components/layout';
 
+/**
+ * america test kitchen
+ * pro home cooks
+ * sara dietschy
+ * cna insider
+ * johnny harris
+ * web dev simplified
+ * fireship
+ * gaurav sen
+ * traversy media
+ */
+
 const ThingsPage = (): JSX.Element => (
   <Layout title="Things">
     <p>A list of things that I like</p>
