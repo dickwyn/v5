@@ -4,7 +4,7 @@ import Meta, { MetaProps } from './meta';
 import styles from '../styles/Layout.module.scss';
 
 interface LayoutProps extends MetaProps {
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactNode;
   hasHeader?: boolean;
   hasFooter?: boolean;
 }
