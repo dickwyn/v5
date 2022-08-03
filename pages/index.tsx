@@ -21,7 +21,7 @@ const IndexPage = (): JSX.Element => (
     <p className={styles.newSection}>current: software engineer at Microsoft</p>
     <p>previous: front end engineer at Clairvoyant/EXL; student at ASU</p>
     <p className={`${styles.mutedText} ${styles.newSection}`}>
-      i like consumer technology, airplanes, photography and eating + cooking chicken rice
+      i like consumer technology, airplanes, photography, and eating + cooking chicken rice
     </p>
     <p className={styles.mutedText}>
       time allocation: 20% coding, 20% youtube video making,10% meetings, 5% cooking, 15% learning,
