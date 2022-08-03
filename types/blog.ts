@@ -6,11 +6,10 @@ export interface BlogProps {
 }
 
 export interface FrontMatter {
-  templateKey?: string;
-  author: string;
   title: string;
-  date: string;
-  description: string;
+  subtitle?: string;
+  summary: string;
+  timestamp: string;
   featured: boolean;
   featuredImage: string;
   tagList: string[];

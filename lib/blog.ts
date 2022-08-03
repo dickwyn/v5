@@ -10,7 +10,7 @@ export const getPostBySlug = (postPath: string) => {
   const fullPath = join(POSTS_PATH, `${realSlug}.mdx`);
   const { content, data } = matter(fs.readFileSync(fullPath, 'utf8'));
 
-  return { content, frontMatter: { ...data, date: data.date, slug: realSlug } };
+  return { content, frontMatter: { ...data, date: data.timestamp, slug: realSlug } };
 };
 
 export const getAllPosts = (): any =>

@@ -3,29 +3,48 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote';
-
+import dayjs from 'dayjs';
 import { serialize } from 'next-mdx-remote/serialize';
 import fs from 'fs';
+import utc from 'dayjs/plugin/utc';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+import styles from '../../styles/blog.module.scss';
 import { BlogProps } from '../../types/blog';
 import Layout from '../../components/layout';
 import { getPostBySlug, POSTS_PATH } from '../../lib/blog';
 
-const PostPage = ({ source, frontMatter: { title, author, date } }: BlogProps): JSX.Element => (
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
+
+const PostPage = ({
+  source,
+  frontMatter: { title, subtitle, timestamp, tagList },
+}: BlogProps): JSX.Element => (
   <Layout title={title}>
     <article>
-      <h1>{title}</h1>
-      <h2>{author}</h2>
-      <h2>{date}</h2>
-      <div className="prose dark:prose-dark">
-        <MDXRemote
-          {...source}
-          components={{
-            Head,
-            Image,
-            Link,
-          }}
-        />
-      </div>
+      <ul className={styles.tagList}>
+        {tagList.map((tag) => (
+          <li key={tag}>
+            {/* TODO change to link tag */}
+            <p>{tag}</p>
+          </li>
+        ))}
+      </ul>
+      <h1 className={styles.title}>{title}</h1>
+      <p className={styles.subtitle}>{subtitle}</p>
+      <time className={styles.timestamp}>
+        {dayjs(timestamp).local().format('D MMM YYYY, h:mma')}
+      </time>
+      <hr />
+      <MDXRemote
+        {...source}
+        components={{
+          Head,
+          Image,
+          Link,
+        }}
+      />
     </article>
   </Layout>
 );

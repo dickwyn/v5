@@ -1,0 +1,29 @@
+.title {
+}
+
+.subtitle {
+  font-size: var(--h5-size);
+}
+
+.timestamp {
+}
+
+.tagList {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  list-style-type: none;
+  text-transform: uppercase;
+  grid-gap: 0.5ch;
+
+  li {
+    border: 1px solid var(--accent);
+
+    P {
+      letter-spacing: -0.1ch;
+      font-weight: 500;
+      margin: 0 1ch;
+      padding: 0;
+    }
+  }
+}
