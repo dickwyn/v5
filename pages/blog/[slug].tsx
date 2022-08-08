@@ -9,10 +9,13 @@ import fs from 'fs';
 import utc from 'dayjs/plugin/utc';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
+import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 import styles from '../../styles/[slug].module.scss';
 import { BlogProps } from '../../types/blog';
 import Layout from '../../components/layout';
 import { getPostBySlug, POSTS_PATH } from '../../lib/blog';
+
+import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
 
 dayjs.extend(utc);
 dayjs.extend(customParseFormat);
@@ -69,6 +72,7 @@ const PostPage = ({
           Head,
           Image,
           Link,
+          LiteYouTubeEmbed, // TODO convert to YouTubeVideo component so that videos are not dependent on this library
         }}
       />
     </article>
