@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
+import NextImage from 'next/image';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote';
 import dayjs from 'dayjs';
@@ -9,13 +9,39 @@ import fs from 'fs';
 import utc from 'dayjs/plugin/utc';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
-import styles from '../../styles/blog.module.scss';
+import styles from '../../styles/[slug].module.scss';
 import { BlogProps } from '../../types/blog';
 import Layout from '../../components/layout';
 import { getPostBySlug, POSTS_PATH } from '../../lib/blog';
 
 dayjs.extend(utc);
 dayjs.extend(customParseFormat);
+
+const Image = ({
+  fileName,
+  alt,
+  caption,
+}: {
+  fileName: string;
+  alt: string;
+  caption: string;
+}): JSX.Element => (
+  <figure className={styles.figure}>
+    <NextImage
+      // eslint-disable-next-line import/no-dynamic-require, global-require
+      src={require(`../../images/blog/${fileName}`)}
+      alt={alt}
+      layout="responsive"
+      className="image"
+    />
+    {caption && (
+      <>
+        <figcaption className="caption">{caption}</figcaption>
+        <hr />
+      </>
+    )}
+  </figure>
+);
 
 const PostPage = ({
   source,
