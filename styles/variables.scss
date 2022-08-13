@@ -16,12 +16,12 @@ body {
   --h6-size: 0.833rem;
 
   @media (max-width: $smartphone-breakpoint) {
-    --horizontal-padding: 0.6rem;
-    --h1-size: calc(2.488rem * 0.68);
-    --h2-size: calc(2.074rem * 0.68);
-    --h3-size: calc(1.728rem * 0.68);
-    --h4-size: calc(1.44rem * 0.68);
-    --h5-size: calc(1.2rem * 0.68);
-    --h6-size: calc(0.833rem * 0.68);
+    --horizontal-padding: 0.8rem;
+    --h1-size: calc(2.488rem * 0.88);
+    --h2-size: calc(2.074rem * 0.88);
+    --h3-size: calc(1.728rem * 0.88);
+    --h4-size: calc(1.44rem * 0.88);
+    --h5-size: calc(1.2rem * 0.88);
+    --h6-size: calc(0.833rem * 0.88);
   }
 }
