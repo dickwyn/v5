@@ -3,15 +3,18 @@ import Image from 'next/image';
 
 import styles from '../styles/index.module.scss';
 import Layout from '../components/layout';
+import HeroImage from '../images/IMG_6764@0.5x.jpg';
 
 const IndexPage = (): JSX.Element => (
   <Layout>
     <div className="image-wrapper">
       <Image
-        alt="orange columns and silhouettes"
-        src="https://images.unsplash.com/photo-1477140765885-9469f102a270?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80"
+        alt="photo of the lower antelope canyon"
+        src={HeroImage}
         width={1600}
-        height={600}
+        height={500}
+        objectFit="cover"
+        objectPosition="0 54%"
       />
     </div>
     <h1 className={`${styles.title} ${styles.newSection}`}>hello, i&apos;m dickwyn</h1>
