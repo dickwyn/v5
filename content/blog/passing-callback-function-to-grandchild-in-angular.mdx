@@ -20,9 +20,9 @@ Meaning that, if I didn't pass a callback function to the `cta-alert.component.t
 
 Here's how the relation between the components look like in this example:
 
-- child `base-alert.component.ts`
-- parent `cta-alert.component.ts`
-- grandparent `app.component.ts`
+-   child `base-alert.component.ts`
+-   parent `cta-alert.component.ts`
+-   grandparent `app.component.ts`
 
 ### The problem
 
@@ -83,16 +83,16 @@ So, for the example below, if I clicked on the 'I Understand' button of the seco
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  template: `
-    <app-base-alert></app-base-alert>
-    <app-cta-alert [dismissButtonCallback]="customCallback"></app-cta-alert>
-  `,
+    selector: 'app-root',
+    template: `
+        <app-base-alert></app-base-alert>
+        <app-cta-alert [dismissButtonCallback]="customCallback"></app-cta-alert>
+    `,
 })
 export class AppComponent {
-  customCallback(): void {
-    console.log('firing from app component');
-  }
+    customCallback(): void {
+        console.log('firing from app component');
+    }
 }
 ```
 
