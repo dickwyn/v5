@@ -34,8 +34,8 @@ const IndexPage = (): JSX.Element => (
             i like consumer technology, airplanes, photography, and eating + cooking chicken rice
         </p>
         <p className={styles.mutedText}>
-            time allocation: 20% coding, 20% youtube video making,10% meetings, 5% cooking, 15%
-            learning, 30% sleep
+            time allocation: 20% coding, 20% video production (youtube), 10% meetings, 5% cooking,
+            15% learning, 30% sleeping
         </p>
     </Layout>
 );
