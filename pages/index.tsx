@@ -28,7 +28,7 @@ const IndexPage = (): JSX.Element => (
         </h2>
         <p className={styles.newSection}>current: software engineer at Microsoft</p>
         <p>
-            previous: front end engineering at{' '}
+            previous: front end engineer at{' '}
             <StandardLink href="https://www.clairvoyant.ai" label="Clairvoyant/EXL" />; computer
             science at <StandardLink href="https://scai.engineering.asu.edu" label="ASU" />
         </p>
