@@ -10,7 +10,7 @@
         1fr;
 
     @media (max-width: $tablet-breakpoint) {
-        padding: 0 var(--horizontal-padding);
+        padding: calc(var(--vertical-padding) / 2) var(--horizontal-padding);
     }
 }
 
