@@ -51,6 +51,26 @@ body {
         margin-bottom: 1.5ch;
     }
 
+    a {
+        color: var(--text);
+        text-decoration: none;
+        background-position: 0 0;
+        background-image: linear-gradient(
+            to top,
+            var(--accent),
+            var(--accent) 0.15em,
+            transparent 0.15em,
+            transparent
+        );
+        word-wrap: break-word;
+        padding-bottom: 0.24ch;
+
+        &:hover {
+            color: var(--accent);
+            background-image: none;
+        }
+    }
+
     h1,
     h2,
     h3,

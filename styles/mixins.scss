@@ -16,3 +16,7 @@
     padding: var(--vertical-padding) var(--horizontal-padding);
     align-items: center;
 }
+
+@mixin reset-default-anchor {
+    background: none;
+}

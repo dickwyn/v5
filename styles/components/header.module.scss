@@ -9,9 +9,13 @@
         grid-column: 2;
         width: 69px;
 
-        // to horizontally align logo with nav links
-        & > a > span {
-            top: 1px;
+        a {
+            @include reset-default-anchor();
+
+            // to horizontally align logo with nav links
+            & > span {
+                top: 1px;
+            }
         }
     }
 

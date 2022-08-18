@@ -1,4 +1,8 @@
+@import '../mixins.scss';
+
 .specialLink {
+    @include reset-default-anchor();
+
     color: var(--text-secondary);
     font-weight: 400;
     margin: 0;
@@ -10,6 +14,7 @@
     &:hover,
     &:active,
     &:focus {
+        color: var(--text-secondary);
         border-bottom: 2px solid var(--accent);
         padding-bottom: 4px;
     }
