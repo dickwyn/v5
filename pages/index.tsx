@@ -16,6 +16,8 @@ const IndexPage = (): JSX.Element => (
                 height={500}
                 objectFit="cover"
                 objectPosition="0 54%"
+                quality={50}
+                placeholder="blur"
             />
         </div>
         <h1 className={`${styles.title} ${styles.newSection} ${styles.minimalHeading}`}>
