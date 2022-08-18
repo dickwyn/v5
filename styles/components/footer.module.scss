@@ -1,0 +1,17 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+
+.container {
+    @include wrapper();
+    @include wrapper-gutters();
+
+    & > div {
+        grid-column: 2;
+    }
+
+    a {
+        &:not(:last-child) {
+            margin-right: var(--horizontal-padding);
+        }
+    }
+}

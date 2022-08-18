@@ -1,0 +1,56 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+
+.container {
+    @include wrapper();
+    @include wrapper-gutters();
+
+    & > div {
+        grid-column: 2;
+        width: 69px;
+
+        // to horizontally align logo with nav links
+        & > a > span {
+            top: 1px;
+        }
+    }
+
+    nav {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        max-width: 1920px;
+        margin: 0 auto;
+
+        ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            user-select: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                display: inline-block;
+                padding: 0;
+                margin: 0 1rem 0 0;
+            }
+        }
+
+        .dark-mode-toggle-container {
+            button {
+                color: var(--text-secondary);
+
+                &:hover {
+                    color: var(--text);
+                }
+
+                &.MuiIconButton-root {
+                    padding: var(--header-icon-padding);
+                }
+            }
+        }
+    }
+}

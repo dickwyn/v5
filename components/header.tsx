@@ -8,6 +8,7 @@ import Image from 'next/image';
 import LogoLight from '../images/brand/logo-light.svg';
 import LogoDark from '../images/brand/logo-dark.svg';
 import SpecialLink from './specialLink';
+import styles from '../styles/components/header.module.scss';
 
 const NAV_LINKS = [
     {
@@ -31,8 +32,8 @@ const Header = (): JSX.Element => {
     const darkMode = useDarkMode();
 
     return (
-        <header className="wrapper">
-            <div className="left logo">
+        <header className={styles.container}>
+            <div>
                 <Link href="/">
                     <a>
                         <Image src={darkMode.value ? LogoDark : LogoLight} alt="dickwyn's icon" />

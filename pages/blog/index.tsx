@@ -4,7 +4,7 @@ import { GetStaticProps } from 'next';
 import Layout from '../../components/layout';
 import StandardLink from '../../components/standardLink';
 import { getAllPosts } from '../../lib/blog';
-import styles from '../../styles/blogIndex.module.scss';
+import styles from '../../styles/pages/blog.module.scss';
 
 const BlogPage = (props: any): JSX.Element => (
     <Layout title="Blog">

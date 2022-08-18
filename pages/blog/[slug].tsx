@@ -10,7 +10,7 @@ import utc from 'dayjs/plugin/utc';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import LiteYouTubeEmbed from 'react-lite-youtube-embed';
-import styles from '../../styles/[slug].module.scss';
+import styles from '../../styles/pages/blog.module.scss';
 import { BlogProps } from '../../types/blog';
 import Layout from '../../components/layout';
 import { getPostBySlug, POSTS_PATH } from '../../lib/blog';

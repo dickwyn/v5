@@ -1,7 +1,7 @@
 import Footer from './footer';
 import Header from './header';
 import Meta, { MetaProps } from './meta';
-import styles from '../styles/Layout.module.scss';
+import styles from '../styles/components/layout.module.scss';
 
 interface LayoutProps extends MetaProps {
     children: React.ReactNode;
@@ -22,7 +22,7 @@ const Layout = ({
         </a>
         {hasHeader && <Header />}
         <div id="content" />
-        <main className="wrapper">{children}</main>
+        <main className={styles.container}>{children}</main>
         {hasFooter && <Footer />}
     </>
 );

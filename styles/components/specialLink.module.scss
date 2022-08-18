@@ -1,0 +1,16 @@
+.specialLink {
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin: 0;
+    margin-bottom: 30px;
+    text-decoration: none;
+    text-transform: lowercase;
+    font-size: 1.2rem;
+
+    &:hover,
+    &:active,
+    &:focus {
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 4px;
+    }
+}

@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import { Fragment } from 'react';
 import SpecialLink from './specialLink';
+import styles from '../styles/components/footer.module.scss';
 
 const SOCIAL_LINKS = [
     {
@@ -21,8 +22,8 @@ const SOCIAL_LINKS = [
 ];
 
 const Footer = (): JSX.Element => (
-    <footer className="wrapper">
-        <div className="left">
+    <footer className={styles.container}>
+        <div>
             {SOCIAL_LINKS.map(({ id, name, href }) => (
                 <Fragment key={id}>
                     <SpecialLink href={href} label={name} />

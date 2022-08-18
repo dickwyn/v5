@@ -2,7 +2,7 @@
 
 import { Fragment } from 'react';
 import Layout from '../components/layout';
-import styles from '../styles/Styleguide.module.scss';
+import styles from '../styles/pages/styleguide.module.scss';
 
 const colorList = [
     {
