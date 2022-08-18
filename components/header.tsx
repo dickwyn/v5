@@ -52,7 +52,7 @@ const Header = (): JSX.Element => {
                         </li>
                     ))}
                 </ul>
-                <div className="dark-mode-toggle-container">
+                <div className={styles.darkModeToggle}>
                     <IconButton
                         aria-label="Toggle automatic/light/dark mode"
                         onClick={darkMode.toggle}

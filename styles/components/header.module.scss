@@ -41,19 +41,19 @@
                 margin: 0 1rem 0 0;
             }
         }
+    }
+}
 
-        .dark-mode-toggle-container {
-            button {
-                color: var(--text-secondary);
+.darkModeToggle {
+    button {
+        color: var(--text-secondary);
 
-                &:hover {
-                    color: var(--text);
-                }
+        &:hover {
+            color: var(--text);
+        }
 
-                &.MuiIconButton-root {
-                    padding: var(--header-icon-padding);
-                }
-            }
+        &.MuiIconButton-root {
+            padding: var(--header-icon-padding);
         }
     }
 }
