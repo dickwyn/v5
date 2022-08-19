@@ -6,11 +6,6 @@
     & > * {
         grid-column: 2 / span 2;
     }
-
-    & > .full-bleed {
-        width: 100%;
-        grid-column: 1 / 5;
-    }
 }
 
 .a11ySkipLink {
