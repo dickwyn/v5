@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import packageJson from '../package.json';
 
+// TODO display build timestamp with time since... (5 hours agao, 2 days ago, etc)
 if (process.env.NODE_ENV === 'production') {
     // eslint-disable-next-line no-console
     console.log(
