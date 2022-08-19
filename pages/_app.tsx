@@ -2,9 +2,24 @@ import '../styles/globals.scss';
 import { GoogleAnalytics } from 'nextjs-google-analytics';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import packageJson from '../package.json';
+
+if (process.env.NODE_ENV === 'production') {
+    // eslint-disable-next-line no-console
+    console.log(
+        `%cDick Wyn Yong's Portfolio ${packageJson.version}\n
+Looking for something?
+👨‍💻 https://www.github.com/dickwyn
+📄 https://dickwyn.xyz/dickwyn-resume.pdf
+🐛 https://dickwyn.xyz/debug\n
+built: ${process.env.NEXT_PUBLIC_BUILD_TIMESTAMP || 'the future'}`,
+        'font-family:monospace;'
+    );
+}
 
 const DwyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
     const AnyComponent = Component as any;
+
     return (
         <>
             <Head>
