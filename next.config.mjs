@@ -8,6 +8,7 @@ const nextConfig = {
         domains: ['images.unsplash.com'],
     },
     env: {
+        // h/t to Ravgeet Dhillon - https://stackoverflow.com/a/70132575/4958244
         NEXT_PUBLIC_BUILD_TIMESTAMP: new Date().toUTCString(),
     },
 };
