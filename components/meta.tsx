@@ -23,7 +23,7 @@ const Meta = ({
     return (
         <Head>
             <title>{title}</title>
-            <meta content={description} name="description" />
+            <meta name="description" content={description} />
             <meta property="og:url" content={`${siteMetadata.url}${router.asPath}`} />
             <link rel="canonical" href={`${siteMetadata.url}${router.asPath}`} />
             <meta property="og:type" content={type} />
