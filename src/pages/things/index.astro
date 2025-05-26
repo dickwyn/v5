@@ -1,0 +1,110 @@
+---
+import { Fragment } from 'react';
+
+import { things } from '../../data/things';
+import Layout from '../../layouts/Layout.astro';
+
+const title = 'Things I Use | Dickwyn Yong';
+const description = 'A comprehensive list of hardware and software that I use on a daily basis.';
+---
+
+<Layout title={title} description={description}>
+    <div class="flex flex-col gap-y-3">
+        <p>
+            From casual web browsing to creating content for YouTube, here's a comprehensive list of
+            hardware and software that I use on a daily basis to create and consume content.
+        </p>
+        <p>I enjoy trying out new things so this list will be updated accordingly.</p>
+        {
+            things.map((section, sectionIndex) => (
+                <Fragment key={`section${sectionIndex}`}>
+                    <h2 class="font-semibold text-2xl mt-5 mb-3 border-b-3">{section.name}</h2>
+                    <p>{section.description}</p>
+                    {section.categoryList &&
+                        section.categoryList.map((category, categoryIndex) => (
+                            <Fragment key={`category${categoryIndex}`}>
+                                <h3>{category.name}</h3>
+                                <ul class="list-disc pl-5">
+                                    {(category.sort
+                                        ? [...category.list].sort((a, b) =>
+                                              a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+                                          )
+                                        : category.list
+                                    ).map((item, itemIndex) => (
+                                        <Fragment key={`item${itemIndex}`}>
+                                            <li
+                                                key={`parent${sectionIndex}-item${itemIndex}`}
+                                                class="mb-2"
+                                            >
+                                                {item.url ? (
+                                                    <a href={item.url}>{item.name}</a>
+                                                ) : (
+                                                    item.name
+                                                )}
+                                                {item.attributeList && (
+                                                    <ul class="list-disc pl-5">
+                                                        {item.attributeList.map(
+                                                            (attribute, attributeIndex) => (
+                                                                <li
+                                                                    key={`parent${sectionIndex}-item${itemIndex}-attribute${attributeIndex}`}
+                                                                    class="mb-1"
+                                                                >
+                                                                    {attribute.url ? (
+                                                                        <a href={attribute.url}>
+                                                                            {attribute.name}
+                                                                        </a>
+                                                                    ) : (
+                                                                        attribute.name
+                                                                    )}
+                                                                </li>
+                                                            )
+                                                        )}
+                                                    </ul>
+                                                )}
+                                            </li>
+                                        </Fragment>
+                                    ))}
+                                </ul>
+                            </Fragment>
+                        ))}
+                    {section.itemList && (
+                        <ul class="list-disc pl-5">
+                            {(section.sort
+                                ? [...section.itemList].sort((a, b) =>
+                                      a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+                                  )
+                                : section.itemList
+                            ).map((item, itemIndex) => (
+                                <Fragment key={`item${itemIndex}`}>
+                                    <li key={`parent${sectionIndex}-item${itemIndex}`} class="mb-2">
+                                        {item.url ? <a href={item.url}>{item.name}</a> : item.name}
+                                        {item.attributeList && (
+                                            <ul class="list-disc pl-5">
+                                                {item.attributeList.map(
+                                                    (attribute, attributeIndex) => (
+                                                        <li
+                                                            key={`parent${sectionIndex}-item${itemIndex}-attribute${attributeIndex}`}
+                                                            class="mb-1"
+                                                        >
+                                                            {attribute.url ? (
+                                                                <a href={attribute.url}>
+                                                                    {attribute.name}
+                                                                </a>
+                                                            ) : (
+                                                                attribute.name
+                                                            )}
+                                                        </li>
+                                                    )
+                                                )}
+                                            </ul>
+                                        )}
+                                    </li>
+                                </Fragment>
+                            ))}
+                        </ul>
+                    )}
+                </Fragment>
+            ))
+        }
+    </div>
+</Layout>

@@ -1,0 +1,45 @@
+---
+const navItems = ['blog', 'things'];
+---
+
+<aside class="-ml-[8px] mb-8 text-lg">
+    <div class="lg:sticky lg:top-20">
+        <nav
+            class="flex flex-row items-center justify-between relative px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
+            id="nav"
+        >
+            <div class="flex flex-row space-x-0 pr-10">
+                <a
+                    href="/"
+                    class="home flex items-center py-1 px-2 m-1 hover:bg-black dark:hover:bg-white"
+                >
+                    <img
+                        src="/images/brand/logo-dark.svg"
+                        alt="dickwyn's icon"
+                        width="54.4"
+                        height="12"
+                        class="dark:hidden"
+                    />
+                    <img
+                        src="/images/brand/logo-light.svg"
+                        alt="dickwyn's icon"
+                        width="54.4"
+                        height="12"
+                        class="hidden dark:block"
+                    />
+                </a>
+                {
+                    navItems.map((navItem) => (
+                        <a
+                            key={navItem}
+                            href={`/${navItem}`}
+                            class="transition-all flex align-middle relative py-1 px-2 m-1"
+                        >
+                            {navItem}
+                        </a>
+                    ))
+                }
+            </div>
+        </nav>
+    </div>
+</aside>

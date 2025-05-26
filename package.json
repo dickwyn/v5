@@ -1,14 +1,44 @@
 {
-  "name": "v5",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "^5.8.0"
-  }
+    "name": "v5",
+    "type": "module",
+    "version": "5.0.0",
+    "author": "Dick Wyn Yong <dickwyn@outlook.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dickwyn/v5"
+    },
+    "bugs": {
+        "url": "https://github.com/dickwyn/v5/issues"
+    },
+    "homepage": "https://dickwyn.xyz",
+    "scripts": {
+        "dev": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro",
+        "prettify": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,mdx,astro}\"",
+        "lint": "eslint ."
+    },
+    "dependencies": {
+        "@astrojs/react": "^4.3.0",
+        "@tailwindcss/vite": "^4.1.7",
+        "@types/react": "^19.1.5",
+        "@types/react-dom": "^19.1.5",
+        "astro": "^5.8.0",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+        "tailwindcss": "^4.1.7"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.27.0",
+        "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
+        "@typescript-eslint/parser": "^8.32.1",
+        "eslint": "^9.27.0",
+        "eslint-plugin-astro": "^1.3.1",
+        "eslint-plugin-react": "^7.37.5",
+        "globals": "^16.2.0",
+        "prettier": "^3.5.3",
+        "prettier-plugin-astro": "^0.14.1",
+        "typescript-eslint": "^8.32.1"
+    }
 }
