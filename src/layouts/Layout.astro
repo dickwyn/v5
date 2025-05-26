@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { version } from '../../package.json';
 
 import Footer from '../components/Footer.astro';
 import Navbar from '../components/Navbar.astro';
@@ -56,10 +57,10 @@ const baseUrl = 'https://dickwyn.xyz';
             <Footer />
         </main>
 
-        <script>
+        <script define:vars={{ version }}>
             // Site info code will be added here
             console.log(
-                `%cDickwyn Yong's Portfolio v5.0.0
+                `%cDickwyn Yong's Portfolio v${version}
 			
 Looking for something?
 			
