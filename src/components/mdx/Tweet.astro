@@ -1,0 +1,27 @@
+---
+interface Props {
+	id: string;
+	className?: string;
+	theme?: 'light' | 'dark';
+	lang?: string;
+	height?: number;
+}
+
+const { id, className = '', theme = 'light', lang = 'en', height = 600 } = Astro.props;
+---
+
+{
+	id ? (
+		<div class={className}>
+			<iframe
+				src={`https://platform.twitter.com/embed/Tweet.html?id=${encodeURIComponent(id)}&theme=${theme}&dnt=true&lang=${encodeURIComponent(lang)}`}
+				title={`Tweet ${id}`}
+				loading="lazy"
+				style={`width: 100%; border: 0; height: ${height}px;`}
+				referrerpolicy="no-referrer-when-downgrade"
+			/>
+		</div>
+	) : (
+		<p>No id provided</p>
+	)
+}

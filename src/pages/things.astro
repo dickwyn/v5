@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import { things } from '../data/things';
+
+function sortList(list: any[]) {
+	return [...list].sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
+}
+---
+
+<Base title="Things" description="Hardware and software that I use daily.">
+	<div class="flex flex-col gap-y-3">
+		<p>
+			From casual web browsing to creating content for YouTube, here's a comprehensive list of
+			hardware and software that I use on a daily basis to create and consume content.
+		</p>
+		<p>I enjoy trying out new things so this list will be updated accordingly.</p>
+		{
+			things.map((section) => (
+				<>
+					<h2 class="font-semibold text-2xl mt-5 mb-3 border-b-3">{section.name}</h2>
+					<p>{section.description}</p>
+					{section.categoryList &&
+						section.categoryList.map((category) => (
+							<>
+								<h3>{category.name}</h3>
+								<ul class="list-disc pl-5">
+									{(category.sort ? sortList(category.list) : category.list).map(
+										(item) => (
+											<li class="mb-2">
+												{item.url ? (
+													<a href={item.url}>{item.name}</a>
+												) : (
+													item.name
+												)}
+												{item.attributeList && (
+													<ul class="list-disc pl-5">
+														{item.attributeList.map((attr) => (
+															<li class="mb-1">
+																{attr.url ? (
+																	<a href={attr.url}>
+																		{attr.name}
+																	</a>
+																) : (
+																	attr.name
+																)}
+															</li>
+														))}
+													</ul>
+												)}
+											</li>
+										)
+									)}
+								</ul>
+							</>
+						))}
+					{section.itemList && (
+						<ul class="list-disc pl-5">
+							{(section.sort ? sortList(section.itemList) : section.itemList).map(
+								(item) => (
+									<li class="mb-2">
+										{item.url ? (
+											<a href={item.url}>{item.name}</a>
+										) : (
+											item.name
+										)}
+										{item.attributeList && (
+											<ul class="list-disc pl-5">
+												{item.attributeList.map((attr) => (
+													<li class="mb-1">
+														{attr.url ? (
+															<a href={attr.url}>{attr.name}</a>
+														) : (
+															attr.name
+														)}
+													</li>
+												))}
+											</ul>
+										)}
+									</li>
+								)
+							)}
+						</ul>
+					)}
+				</>
+			))
+		}
+	</div>
+</Base>

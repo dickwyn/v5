@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const posts = await getCollection('blog');
+const styleguidePost = posts.find((p) => p.data.slug === 'styleguide');
+
+if (!styleguidePost) {
+	return Astro.redirect('/404');
+}
+
+const { Content } = await render(styleguidePost);
+---
+
+<Base title="Style Guide" description="Visual reference for blog typography and embedded components.">
+	<section>
+		<div class="flex justify-between items-center my-2 text-sm">
+			<p class="text-sm text-neutral-600 dark:text-neutral-400">Style Guide</p>
+		</div>
+		<h1 class="text-balance font-semibold text-2xl tracking-tighter">
+			{styleguidePost.data.title}
+		</h1>
+		<article class="blog">
+			<Content />
+		</article>
+	</section>
+</Base>

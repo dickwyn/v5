@@ -1,0 +1,76 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+	ogImage?: string;
+}
+
+const siteName = 'Dickwyn Yong';
+const siteDescription =
+	'Dickwyn is a software engineer and content creator. He is a Malaysian living in America and enjoys experimenting with new recipes in the kitchen and geeking out on the latest tech gadgets.';
+const baseUrl = 'https://dickwyn.com';
+
+const { title, description, ogImage } = Astro.props;
+const pageTitle = title ? `${title} | ${siteName}` : siteName;
+const pageDescription = description || siteDescription;
+const resolvedOgImage = ogImage || `${baseUrl}/og-default.png`;
+const canonicalUrl = new URL(Astro.url.pathname, baseUrl).href;
+---
+
+<!doctype html>
+<html lang="en" class="text-black bg-white dark:text-white dark:bg-black">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{pageTitle}</title>
+		<meta name="description" content={pageDescription} />
+		<link rel="canonical" href={canonicalUrl} />
+
+		<!-- Favicons -->
+		<link rel="icon" type="image/png" href="/favicon-48x48.png" sizes="48x48" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<meta name="apple-mobile-web-app-title" content="MyWebSite" />
+		<link rel="manifest" href="/site.webmanifest" />
+
+		<!-- RSS -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDescription} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:site_name" content={siteName} />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:image" content={resolvedOgImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={pageDescription} />
+
+		<!-- Analytics -->
+		<script
+			is:inline
+			src="https://analytics.dickwyn.com/script.js"
+			data-website-id="a38ba9c3-b3ac-4d35-a975-43dc25892827"
+			data-domains="www.dickwyn.com"
+			defer
+		></script>
+	</head>
+	<body class="antialiased max-w-xl mx-4 mt-8 lg:mx-auto">
+		<main class="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
+			<Nav />
+			<slot />
+			<Footer />
+		</main>
+	</body>
+</html>

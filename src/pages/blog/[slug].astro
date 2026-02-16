@@ -1,0 +1,78 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { formatDate } from '../../utils';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	const publishedPosts = posts
+		.filter((p) => !p.data.draft)
+		.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+	return posts.map((post) => {
+		const idx = publishedPosts.findIndex((p) => p.data.slug === post.data.slug);
+		const newerPost = idx > 0 ? publishedPosts[idx - 1] : null;
+		const olderPost = idx >= 0 && idx < publishedPosts.length - 1 ? publishedPosts[idx + 1] : null;
+
+		return {
+			params: { slug: post.data.slug },
+			props: {
+				post,
+				newerPost: newerPost ? { slug: newerPost.data.slug, title: newerPost.data.title } : null,
+				olderPost: olderPost ? { slug: olderPost.data.slug, title: olderPost.data.title } : null,
+			},
+		};
+	});
+}
+
+const { post, newerPost, olderPost } = Astro.props;
+const { Content } = await render(post);
+const baseUrl = 'https://dickwyn.com';
+const ogImage = post.data.image
+	? post.data.image.startsWith('http')
+		? post.data.image
+		: `${baseUrl}${post.data.image}`
+	: undefined;
+---
+
+<Base title={post.data.title} description={post.data.description} ogImage={ogImage}>
+	<section>
+		<div class="flex justify-between items-center my-2 text-sm">
+			<p class="text-sm text-neutral-600 dark:text-neutral-400">
+				{formatDate(post.data.date)}
+			</p>
+		</div>
+		<h1 class="text-balance font-semibold text-2xl tracking-tighter">
+			{post.data.title}
+		</h1>
+		<article class="blog">
+			<Content />
+		</article>
+		{
+			(newerPost || olderPost) && (
+				<nav class="mt-12 pt-6 border-t border-neutral-200 dark:border-neutral-800 grid grid-cols-2 gap-4">
+					<div>
+						{newerPost && (
+							<>
+								<span class="block text-xs uppercase tracking-wide text-neutral-500">
+									Newer
+								</span>
+								<a href={`/blog/${newerPost.slug}`}>{newerPost.title}</a>
+							</>
+						)}
+					</div>
+					<div class="text-right">
+						{olderPost && (
+							<>
+								<span class="block text-xs uppercase tracking-wide text-neutral-500">
+									Older
+								</span>
+								<a href={`/blog/${olderPost.slug}`}>{olderPost.title}</a>
+							</>
+						)}
+					</div>
+				</nav>
+			)
+		}
+	</section>
+</Base>

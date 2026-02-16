@@ -1,14 +1,42 @@
 {
-  "name": "v5",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "^5.8.0"
-  }
+	"name": "www.dickwyn.com",
+	"description": "Dickwyn's website",
+	"version": "5.0.0",
+	"type": "module",
+	"packageManager": "pnpm@10.28.2",
+	"author": "Dick Wyn Yong <dickwyn@outlook.com>",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dickwyn/v5"
+	},
+	"bugs": {
+		"url": "https://github.com/dickwyn/v5/issues"
+	},
+	"homepage": "https://dickwyn.com",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/mdx": "^4.3.0",
+		"@astrojs/rss": "^4.0.0",
+		"@astrojs/sitemap": "^3.3.0",
+		"@fontsource-variable/fira-code": "^5.2.5",
+		"@fontsource-variable/inter": "^5.2.5",
+		"@fontsource-variable/literata": "^5.2.5",
+		"@tailwindcss/vite": "^4.1.7",
+		"astro": "^5.10.0",
+		"astro-auto-import": "^0.4.4",
+		"sharp": "^0.33.0",
+		"simple-icons": "^15.13.0",
+		"tailwindcss": "^4.1.7"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"@tailwindcss/oxide",
+			"sharp"
+		]
+	}
 }

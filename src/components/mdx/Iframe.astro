@@ -1,0 +1,33 @@
+---
+interface Props {
+	src: string;
+	title?: string;
+	height?: number;
+	allowFullscreen?: boolean;
+	className?: string;
+}
+
+const {
+	src,
+	title = 'Embedded content',
+	height = 400,
+	allowFullscreen = true,
+	className = '',
+} = Astro.props;
+---
+
+{
+	src ? (
+		<div class={className}>
+			<iframe
+				src={src}
+				title={title}
+				loading="lazy"
+				style={`width: 100%; height: ${height}px; border: 0;`}
+				{...(allowFullscreen ? { allowfullscreen: true } : {})}
+			/>
+		</div>
+	) : (
+		<p>No src provided</p>
+	)
+}

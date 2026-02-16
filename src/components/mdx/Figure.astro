@@ -1,0 +1,21 @@
+---
+interface Props {
+	src: string;
+	alt?: string;
+	caption?: string;
+	className?: string;
+}
+
+const { src, alt = '', caption, className = '' } = Astro.props;
+---
+
+{
+	src ? (
+		<figure class={className}>
+			<img src={src} alt={alt} loading="lazy" class="rounded-lg" />
+			{caption ? <figcaption>{caption}</figcaption> : null}
+		</figure>
+	) : (
+		<p>No src provided</p>
+	)
+}
