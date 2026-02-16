@@ -3,6 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import AutoImport from 'astro-auto-import';
 import { defineConfig } from 'astro/config';
+import mkcert from 'vite-plugin-mkcert';
 
 export default defineConfig({
 	site: 'https://dickwyn.com',
@@ -32,6 +33,6 @@ export default defineConfig({
 		},
 	},
 	vite: {
-		plugins: [tailwindcss()],
+		plugins: [tailwindcss(), mkcert()],
 	},
 });
