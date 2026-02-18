@@ -1,30 +1,30 @@
 {
-  "name": "v5",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
-  "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {}
-  },
-  "forwardPorts": [4321],
-  "mounts": [
-    "source=${localEnv:HOME}/Library/Application Support/mkcert,target=/home/node/mkcert,type=bind,readonly"
-  ],
-  "postCreateCommand": "mkdir -p /home/node/.local/share/pnpm && git config --global url.'https://github.com/'.insteadOf 'git@github.com:' && git config --global user.name 'dickwyn' && git config --global user.email 'dickwyn@outlook.com' && pnpm install && echo '\nalias c=\"clear\"\nalias branch=\"git checkout -b\"\nalias publish=\"git push -u origin HEAD\"\nalias delete=\"git branch -d\"\n' >> ~/.zshrc",
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "astro-build.astro-vscode",
-        "esbenp.prettier-vscode",
-        "bradlc.vscode-tailwindcss"
-      ],
-      "settings": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true,
-        "terminal.integrated.defaultProfile.linux": "zsh"
-      }
+    "name": "v5",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+    "features": {
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+    "forwardPorts": [4321],
+    "mounts": [
+        "source=${localEnv:HOME}/Library/Application Support/mkcert,target=/home/node/mkcert,type=bind,readonly"
+    ],
+    "postCreateCommand": "mkdir -p /home/node/.local/share/pnpm && git config --global url.'https://github.com/'.insteadOf 'git@github.com:' && git config --global user.name 'dickwyn' && git config --global user.email 'dickwyn@outlook.com' && pnpm install && echo '\nalias c=\"clear\"\nalias branch=\"git checkout -b\"\nalias publish=\"git push -u origin HEAD\"\nalias delete=\"git branch -d\"\n' >> ~/.zshrc",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "astro-build.astro-vscode",
+                "esbenp.prettier-vscode",
+                "bradlc.vscode-tailwindcss"
+            ],
+            "settings": {
+                "editor.defaultFormatter": "esbenp.prettier-vscode",
+                "editor.formatOnSave": true,
+                "terminal.integrated.defaultProfile.linux": "zsh"
+            }
+        }
+    },
+    "containerEnv": {
+        "npm_config_store_dir": "/home/node/.local/share/pnpm/store",
+        "CAROOT": "/home/node/mkcert"
     }
-  },
-  "containerEnv": {
-    "npm_config_store_dir": "/home/node/.local/share/pnpm/store",
-    "CAROOT": "/home/node/mkcert"
-  }
 }

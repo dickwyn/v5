@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { things } from '../data/things';
 
-function sortList(list: any[]) {
+function sortList<T extends { name: string }>(list: T[]) {
 	return [...list].sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
 }
 ---

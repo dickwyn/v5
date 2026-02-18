@@ -4,106 +4,106 @@
 @import '@fontsource-variable/literata';
 
 @theme {
-	--font-sans: 'Inter Variable', sans-serif;
-	--font-mono: 'Fira Code Variable', monospace;
-	--font-serif: 'Literata Variable', serif;
-	--color-brand: #d84c4c;
+    --font-sans: 'Inter Variable', sans-serif;
+    --font-mono: 'Fira Code Variable', monospace;
+    --font-serif: 'Literata Variable', serif;
+    --color-brand: #d84c4c;
 }
 
 @media (prefers-color-scheme: dark) {
-	html {
-		color-scheme: dark;
-	}
+    html {
+        color-scheme: dark;
+    }
 }
 
 :root {
-	--color-brand-hover: color-mix(in srgb, var(--color-brand) 15%, transparent);
+    --color-brand-hover: color-mix(in srgb, var(--color-brand) 15%, transparent);
 }
 
 html {
-	min-width: 360px;
+    min-width: 360px;
 }
 
 table {
-	display: block;
-	max-width: fit-content;
-	overflow-x: auto;
-	white-space: nowrap;
+    display: block;
+    max-width: fit-content;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 a {
-	@apply underline decoration-brand underline-offset-3;
+    @apply underline decoration-brand underline-offset-3;
 
-	&:hover {
-		@apply no-underline text-brand;
-	}
+    &:hover {
+        @apply no-underline text-brand;
+    }
 }
 
 code {
-	@apply px-1 py-0.5 rounded-lg bg-neutral-100 dark:bg-neutral-800;
+    @apply px-1 py-0.5 rounded-lg bg-neutral-100 dark:bg-neutral-800;
 
-	span {
-		@apply font-medium;
-	}
+    span {
+        @apply font-medium;
+    }
 }
 
 .astro-code {
-	@apply my-4 p-3 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-800;
+    @apply my-4 p-3 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-800;
 
-	code {
-		@apply bg-transparent p-0;
-	}
+    code {
+        @apply bg-transparent p-0;
+    }
 }
 
 .blog {
-	@apply font-serif;
+    @apply font-serif;
 
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6,
-	p {
-		font-feature-settings:
-			'liga' 1,
-			'kern' 1;
-	}
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+        font-feature-settings:
+            'liga' 1,
+            'kern' 1;
+    }
 
-	p {
-		@apply my-4 text-neutral-800 dark:text-neutral-200 leading-7;
-	}
+    p {
+        @apply my-4 text-neutral-800 dark:text-neutral-200 leading-7;
+    }
 
-	h1 {
-		@apply text-4xl font-medium tracking-tight mt-6 mb-2;
-	}
+    h1 {
+        @apply text-4xl font-medium tracking-tight mt-6 mb-2;
+    }
 
-	h2 {
-		@apply text-xl font-medium tracking-tight mt-6 mb-2;
-	}
+    h2 {
+        @apply text-xl font-medium tracking-tight mt-6 mb-2;
+    }
 
-	h3 {
-		@apply text-xl font-medium tracking-tight mt-6 mb-2;
-	}
+    h3 {
+        @apply text-xl font-medium tracking-tight mt-6 mb-2;
+    }
 
-	h4 {
-		@apply text-lg font-medium tracking-tight mt-6 mb-2;
-	}
+    h4 {
+        @apply text-lg font-medium tracking-tight mt-6 mb-2;
+    }
 
-	strong {
-		@apply font-medium;
-	}
+    strong {
+        @apply font-medium;
+    }
 
-	ul {
-		@apply list-disc pl-6;
-	}
+    ul {
+        @apply list-disc pl-6;
+    }
 
-	ol {
-		@apply list-decimal pl-6;
-	}
+    ol {
+        @apply list-decimal pl-6;
+    }
 
-	> :first-child {
-		margin-top: 1.25em !important;
-		margin-bottom: 1.25em !important;
-	}
+    > :first-child {
+        margin-top: 1.25em !important;
+        margin-bottom: 1.25em !important;
+    }
 }

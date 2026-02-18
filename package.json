@@ -1,45 +1,52 @@
 {
-	"name": "www.dickwyn.com",
-	"description": "Dickwyn's website",
-	"version": "5.0.0",
-	"type": "module",
-	"packageManager": "pnpm@10.28.2",
-	"author": "Dick Wyn Yong <dickwyn@outlook.com>",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/dickwyn/v5"
-	},
-	"bugs": {
-		"url": "https://github.com/dickwyn/v5/issues"
-	},
-	"homepage": "https://dickwyn.com",
-	"scripts": {
-		"dev": "astro dev",
-		"build": "astro build",
-		"preview": "astro preview",
-		"astro": "astro"
-	},
-	"dependencies": {
-		"@astrojs/mdx": "^4.3.0",
-		"@astrojs/rss": "^4.0.0",
-		"@astrojs/sitemap": "^3.3.0",
-		"@fontsource-variable/fira-code": "^5.2.5",
-		"@fontsource-variable/inter": "^5.2.5",
-		"@fontsource-variable/literata": "^5.2.5",
-		"@tailwindcss/vite": "^4.1.7",
-		"astro": "^5.10.0",
-		"astro-auto-import": "^0.4.4",
-		"sharp": "^0.33.0",
-		"simple-icons": "^15.13.0",
-		"tailwindcss": "^4.1.7"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@tailwindcss/oxide",
-			"sharp"
-		]
-	},
-	"devDependencies": {
-		"vite-plugin-mkcert": "^1.17.9"
-	}
+    "name": "www.dickwyn.com",
+    "version": "5.0.0",
+    "description": "Dickwyn's website",
+    "homepage": "https://dickwyn.com",
+    "bugs": {
+        "url": "https://github.com/dickwyn/v5/issues"
+    },
+    "author": "Dick Wyn Yong <dickwyn@outlook.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dickwyn/v5"
+    },
+    "type": "module",
+    "scripts": {
+        "dev": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro",
+        "lint": "oxlint --type-aware .",
+        "lint:fix": "oxlint --type-aware --fix .",
+        "fmt": "oxfmt .",
+        "fmt:check": "oxfmt --check ."
+    },
+    "dependencies": {
+        "@astrojs/mdx": "^4.3.0",
+        "@astrojs/rss": "^4.0.0",
+        "@astrojs/sitemap": "^3.3.0",
+        "@fontsource-variable/fira-code": "^5.2.5",
+        "@fontsource-variable/inter": "^5.2.5",
+        "@fontsource-variable/literata": "^5.2.5",
+        "@tailwindcss/vite": "^4.1.7",
+        "astro": "^5.10.0",
+        "astro-auto-import": "^0.4.4",
+        "sharp": "^0.33.0",
+        "simple-icons": "^15.13.0",
+        "tailwindcss": "^4.1.7"
+    },
+    "devDependencies": {
+        "oxfmt": "^0.33.0",
+        "oxlint": "^1.48.0",
+        "oxlint-tsgolint": "^0.14.0",
+        "vite-plugin-mkcert": "^1.17.9"
+    },
+    "packageManager": "pnpm@10.28.2",
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "@tailwindcss/oxide",
+            "sharp"
+        ]
+    }
 }
