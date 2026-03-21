@@ -1,0 +1,7 @@
+{
+    "threshold": 5,
+    "reporters": ["console"],
+    "ignore": ["**/node_modules/**", "**/dist/**", "**/.astro/**", "**/content/blog/**"],
+    "format": ["javascript", "typescript", "markup"],
+    "absolute": true
+}

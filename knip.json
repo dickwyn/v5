@@ -1,0 +1,13 @@
+{
+    "$schema": "https://unpkg.com/knip@6/schema.json",
+    "entry": ["src/pages/**/*.{astro,ts}"],
+    "project": ["src/**/*.{astro,ts,tsx,js,jsx,mjs}"],
+    "ignore": ["src/components/mdx/**"],
+    "ignoreDependencies": [
+        "sharp",
+        "@fontsource-variable/fira-code",
+        "@fontsource-variable/inter",
+        "@fontsource-variable/literata",
+        "tailwindcss"
+    ]
+}

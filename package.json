@@ -16,8 +16,10 @@
         "astro": "astro",
         "build": "astro build",
         "dev": "astro dev",
+        "cpd": "jscpd src",
         "fmt": "oxfmt .",
         "fmt:check": "oxfmt --check .",
+        "knip": "knip",
         "lint": "oxlint --type-aware .",
         "lint:fix": "oxlint --type-aware --fix .",
         "prepare": "lefthook install",
@@ -38,6 +40,8 @@
         "tailwindcss": "^4.1.7"
     },
     "devDependencies": {
+        "jscpd": "^4.0.8",
+        "knip": "^6.0.1",
         "lefthook": "^2.1.4",
         "oxfmt": "^0.33.0",
         "oxlint": "^1.48.0",
