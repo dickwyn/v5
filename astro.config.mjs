@@ -8,16 +8,7 @@ import mkcert from 'vite-plugin-mkcert';
 
 const { version } = JSON.parse(readFileSync('./package.json', 'utf-8'));
 
-const buildTimestamp = new Date().toLocaleString('en-US', {
-    weekday: 'short',
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-    second: '2-digit',
-    timeZoneName: 'short',
-});
+const buildTimestamp = new Date().toISOString();
 
 export default defineConfig({
     site: 'https://dickwyn.com',
