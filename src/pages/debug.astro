@@ -1,9 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const version = import.meta.env.PUBLIC_SITE_VERSION;
+const buildTimestamp = import.meta.env.PUBLIC_BUILD_TIMESTAMP;
 ---
 
 <Base title="Debug">
 	<div>
 		<h1>Debug</h1>
+		<ul class="mt-4 space-y-1 text-sm">
+			<li><strong>Version:</strong> {version}</li>
+			<li><strong>Build Timestamp:</strong> {buildTimestamp}</li>
+		</ul>
 	</div>
 </Base>

@@ -1,0 +1,19 @@
+<script>
+	if (import.meta.env.PROD) {
+		const version = import.meta.env.PUBLIC_SITE_VERSION;
+		const buildTimestamp = import.meta.env.PUBLIC_BUILD_TIMESTAMP;
+
+		const headerStyle =
+			'color: #fff; background: #000; font-size: 14px; font-weight: bold; padding: 4px 8px; border-radius: 4px;';
+		const labelStyle = 'color: #888; font-size: 12px;';
+		const valueStyle = 'color: #000; font-size: 12px; font-weight: bold;';
+		const linkStyle = 'color: #0969da; font-size: 12px;';
+
+		console.log('%cdickwyn.com', headerStyle);
+		console.log('%cVersion:  %c' + version, labelStyle, valueStyle);
+		console.log('%cBuilt:    %c' + buildTimestamp, labelStyle, valueStyle);
+		console.log('%cGitHub:   %chttps://github.com/dickwyn/v5', labelStyle, linkStyle);
+		console.log('%cResume:   %chttps://dickwyn.com/resume', labelStyle, linkStyle);
+		console.log('%cDebug:    %chttps://dickwyn.com/debug', labelStyle, linkStyle);
+	}
+</script>
