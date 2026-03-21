@@ -13,15 +13,15 @@
     },
     "type": "module",
     "scripts": {
-        "dev": "astro dev",
-        "build": "astro build",
-        "preview": "astro preview",
         "astro": "astro",
-        "lint": "oxlint --type-aware .",
-        "lint:fix": "oxlint --type-aware --fix .",
+        "build": "astro build",
+        "dev": "astro dev",
         "fmt": "oxfmt .",
         "fmt:check": "oxfmt --check .",
-        "prepare": "lefthook install"
+        "lint": "oxlint --type-aware .",
+        "lint:fix": "oxlint --type-aware --fix .",
+        "prepare": "lefthook install",
+        "preview": "astro preview"
     },
     "dependencies": {
         "@astrojs/mdx": "^5.0.2",
