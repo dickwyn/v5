@@ -20,16 +20,19 @@ const buildTimestamp = import.meta.env.PUBLIC_BUILD_TIMESTAMP;
 	if (el) {
 		const raw = el.textContent?.trim();
 		if (raw) {
-			el.textContent = new Date(raw).toLocaleString(undefined, {
-				weekday: 'short',
-				month: 'short',
-				day: 'numeric',
-				year: 'numeric',
-				hour: 'numeric',
-				minute: '2-digit',
-				second: '2-digit',
-				timeZoneName: 'short',
-			});
+			const date = new Date(raw);
+			if (!Number.isNaN(date.getTime())) {
+				el.textContent = date.toLocaleString(undefined, {
+					weekday: 'short',
+					month: 'short',
+					day: 'numeric',
+					year: 'numeric',
+					hour: 'numeric',
+					minute: '2-digit',
+					second: '2-digit',
+					timeZoneName: 'short',
+				});
+			}
 		}
 	}
 </script>

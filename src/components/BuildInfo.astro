@@ -1,16 +1,19 @@
 <script>
 	if (import.meta.env.PROD) {
 		const version = import.meta.env.PUBLIC_SITE_VERSION;
-		const buildTimestamp = new Date(import.meta.env.PUBLIC_BUILD_TIMESTAMP).toLocaleString(undefined, {
-			weekday: 'short',
-			month: 'short',
-			day: 'numeric',
-			year: 'numeric',
-			hour: 'numeric',
-			minute: '2-digit',
-			second: '2-digit',
-			timeZoneName: 'short',
-		});
+		const buildDate = new Date(import.meta.env.PUBLIC_BUILD_TIMESTAMP);
+		const buildTimestamp = Number.isNaN(buildDate.getTime())
+			? import.meta.env.PUBLIC_BUILD_TIMESTAMP
+			: buildDate.toLocaleString(undefined, {
+					weekday: 'short',
+					month: 'short',
+					day: 'numeric',
+					year: 'numeric',
+					hour: 'numeric',
+					minute: '2-digit',
+					second: '2-digit',
+					timeZoneName: 'short',
+				});
 
 		const headerStyle =
 			'color: #fff; background: #000; font-size: 14px; font-weight: bold; padding: 4px 8px; border-radius: 4px;';
