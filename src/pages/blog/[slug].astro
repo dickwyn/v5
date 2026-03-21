@@ -33,9 +33,29 @@ const ogImage = post.data.image
 		? post.data.image
 		: `${baseUrl}${post.data.image}`
 	: undefined;
+const canonicalUrl = `${baseUrl}/blog/${post.data.slug}`;
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: post.data.title,
+	description: post.data.description,
+	datePublished: post.data.date,
+	author: {
+		'@type': 'Person',
+		name: 'Dickwyn Yong',
+		url: baseUrl,
+	},
+	url: canonicalUrl,
+	mainEntityOfPage: {
+		'@type': 'WebPage',
+		'@id': canonicalUrl,
+	},
+	...(ogImage ? { image: ogImage } : {}),
+};
 ---
 
 <Base title={post.data.title} description={post.data.description} ogImage={ogImage}>
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 	<section>
 		<div class="flex justify-between items-center my-2 text-sm">
 			<p class="text-sm text-neutral-600 dark:text-neutral-400">
