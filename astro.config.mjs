@@ -3,10 +3,11 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import AutoImport from 'astro-auto-import';
 import { defineConfig } from 'astro/config';
-import { readFileSync } from 'node:fs';
 import mkcert from 'vite-plugin-mkcert';
 
-const { version } = JSON.parse(readFileSync('./package.json', 'utf-8'));
+import packageJson from './package.json' with { type: 'json' };
+
+const { version } = packageJson;
 
 const buildTimestamp = new Date().toISOString();
 
@@ -14,6 +15,9 @@ export default defineConfig({
     site: 'https://dickwyn.com',
     server: {
         host: '0.0.0.0',
+    },
+    redirects: {
+        '/resume': '/dickwyn-resume.pdf',
     },
     integrations: [
         AutoImport({
