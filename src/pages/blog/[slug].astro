@@ -32,7 +32,7 @@ const ogImage = post.data.image
 	? post.data.image.startsWith('http')
 		? post.data.image
 		: `${baseUrl}${post.data.image}`
-	: undefined;
+	: `${baseUrl}/og.png?title=${encodeURIComponent(post.data.title)}`;
 ---
 
 <Base title={post.data.title} description={post.data.description} ogImage={ogImage}>

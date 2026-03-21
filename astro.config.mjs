@@ -1,4 +1,5 @@
 import mdx from '@astrojs/mdx';
+import node from '@astrojs/node';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import AutoImport from 'astro-auto-import';
@@ -7,6 +8,7 @@ import mkcert from 'vite-plugin-mkcert';
 
 export default defineConfig({
     site: 'https://dickwyn.com',
+    adapter: node({ mode: 'standalone' }),
     server: {
         host: '0.0.0.0',
     },

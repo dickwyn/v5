@@ -17,7 +17,7 @@ const baseUrl = 'https://dickwyn.com';
 const { title, description, ogImage } = Astro.props;
 const pageTitle = title ? `${title} | ${siteName}` : siteName;
 const pageDescription = description || siteDescription;
-const resolvedOgImage = ogImage || `${baseUrl}/og-default.png`;
+const resolvedOgImage = ogImage || `${baseUrl}/images/brand/og-default.png`;
 const canonicalUrl = new URL(Astro.url.pathname, baseUrl).href;
 ---
 
