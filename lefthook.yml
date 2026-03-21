@@ -7,3 +7,7 @@ pre-commit:
         - name: oxfmt
           glob: '*.{js,ts,jsx,tsx,astro,mjs,json,css}'
           run: pnpm oxfmt --check {staged_files}
+        - name: knip
+          run: pnpm knip
+        - name: jscpd
+          run: pnpm jscpd
