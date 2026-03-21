@@ -51,17 +51,8 @@ export const things = [
                 name: 'desk setup',
                 list: [
                     {
-                        name: 'MacBook Pro 16-inch (Late 2019)',
-                        attributeList: [
-                            { name: '2.4GHz 8-core Intel Core i9' },
-                            { name: '32GB 2667MHz DDR4' },
-                            { name: 'AMD Radeon Pro 5500M with 8GB GDDR6 memory' },
-                            { name: '2TB SSD' },
-                            {
-                                name: 'dbrand Black Camo Skin',
-                                url: 'https://dbrand.com/shop/apple-macbook-pro-16-skins-2019',
-                            },
-                        ],
+                        name: 'MacBook Neo',
+                        attributeList: [{ name: 'Blush' }, { name: '256GB SSD' }],
                     },
                     {
                         name: 'iPad Pro 11-inch (2nd generation)',
@@ -240,14 +231,13 @@ export const things = [
                     { name: 'Affinity Photo' },
                     { name: 'Davinci Resolve Studio' },
                     { name: 'Google Chrome' },
-                    { name: 'Malwarebytes' },
                     { name: 'Microsoft Office' },
                     { name: 'Spotify' },
                     { name: 'Visual Studio Code' },
                     { name: 'FreeFileSync' },
                     { name: 'f.lux' },
                     { name: 'iZotope RX 8' },
-                    { name: '1Password 8' },
+                    { name: '1Password' },
                 ],
             },
             {
@@ -285,12 +275,10 @@ export const things = [
                 sort: true,
                 list: [
                     { name: 'Code Spell Checker' },
-                    { name: 'GitLens' },
                     { name: 'LaTeX Workshop' },
                     { name: 'Live Server' },
                     { name: 'Material Icon Theme' },
                     { name: 'Peacock' },
-                    { name: 'Prettier' },
                     { name: 'Rainglow' },
                     { name: 'Todo Tree' },
                 ],
