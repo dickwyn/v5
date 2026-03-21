@@ -107,3 +107,25 @@ code {
         margin-bottom: 1.25em !important;
     }
 }
+
+.things {
+    p {
+        @apply my-3 text-neutral-700 dark:text-neutral-300 leading-7;
+    }
+
+    h3 {
+        @apply text-lg font-medium tracking-tight mt-8 mb-3;
+    }
+
+    strong {
+        @apply font-semibold text-black dark:text-white;
+    }
+
+    ul {
+        @apply list-none pl-0 space-y-3;
+    }
+
+    li {
+        @apply text-neutral-700 dark:text-neutral-300 leading-7;
+    }
+}
