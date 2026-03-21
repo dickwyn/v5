@@ -21,8 +21,19 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Bump patch version
-        run: npm version patch --no-git-tag-version
+      - name: Determine version bump level
+        id: bump-level
+        run: |
+          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          TYPE=$(echo "$COMMIT_MSG" | head -1 | sed -n 's/^\([a-z]*\).*/\1/p')
+          if [ "$TYPE" = "feat" ]; then
+            echo "level=minor" >> "$GITHUB_OUTPUT"
+          else
+            echo "level=patch" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Bump version
+        run: npm version ${{ steps.bump-level.outputs.level }} --no-git-tag-version
 
       - name: Commit and push
         run: |
