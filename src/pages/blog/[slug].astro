@@ -39,7 +39,7 @@ const jsonLd = {
 	'@type': 'BlogPosting',
 	headline: post.data.title,
 	description: post.data.description,
-	datePublished: post.data.date,
+	datePublished: new Date(post.data.date).toISOString(),
 	author: {
 		'@type': 'Person',
 		name: 'Dickwyn Yong',
