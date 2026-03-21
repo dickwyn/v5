@@ -1,0 +1,17 @@
+{
+    "$schema": "https://json.schemastore.org/jscpd.json",
+    "threshold": 5,
+    "reporters": ["console"],
+    "ignore": [
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/.astro/**",
+        "pnpm-lock.yaml",
+        "**/public/**"
+    ],
+    "absolute": false,
+    "formatsExts": {
+        "markup": ["astro"],
+        "markdown": ["mdx"]
+    }
+}

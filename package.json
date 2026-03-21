@@ -18,6 +18,8 @@
         "dev": "astro dev",
         "fmt": "oxfmt .",
         "fmt:check": "oxfmt --check .",
+        "jscpd": "jscpd .",
+        "knip": "knip",
         "lint": "oxlint --type-aware .",
         "lint:fix": "oxlint --type-aware --fix .",
         "prepare": "lefthook install",
@@ -33,11 +35,14 @@
         "@tailwindcss/vite": "^4.1.7",
         "astro": "^6.0.8",
         "astro-auto-import": "^0.5.1",
-        "sharp": "^0.33.0",
         "simple-icons": "^15.13.0",
         "tailwindcss": "^4.1.7"
     },
     "devDependencies": {
+        "@commitlint/cli": "^20.5.0",
+        "@commitlint/config-conventional": "^20.5.0",
+        "jscpd": "^4.0.8",
+        "knip": "^6.0.1",
         "lefthook": "^2.1.4",
         "oxfmt": "^0.33.0",
         "oxlint": "^1.48.0",
@@ -48,8 +53,7 @@
     "pnpm": {
         "onlyBuiltDependencies": [
             "@tailwindcss/oxide",
-            "lefthook",
-            "sharp"
+            "lefthook"
         ],
         "ignoredBuiltDependencies": [
             "esbuild"
