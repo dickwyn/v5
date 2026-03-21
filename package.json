@@ -18,7 +18,7 @@
         "dev": "astro dev",
         "fmt": "oxfmt .",
         "fmt:check": "oxfmt --check .",
-        "lint": "oxlint --type-aware .",
+        "lint": "oxlint --type-aware",
         "lint:fix": "oxlint --type-aware --fix .",
         "prepare": "lefthook install",
         "preview": "astro preview"

@@ -3,7 +3,7 @@ pre-commit:
     jobs:
         - name: oxlint
           glob: '*.{js,ts,jsx,tsx,astro,mjs}'
-          run: pnpm lint
+          run: pnpm lint {staged_files}
         - name: oxfmt
           glob: '*.{js,ts,jsx,tsx,astro,mjs,json,css}'
           run: pnpm fmt:check
