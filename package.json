@@ -23,15 +23,15 @@
         "fmt:check": "oxfmt --check ."
     },
     "dependencies": {
-        "@astrojs/mdx": "^4.3.0",
-        "@astrojs/rss": "^4.0.0",
-        "@astrojs/sitemap": "^3.3.0",
+        "@astrojs/mdx": "^5.0.2",
+        "@astrojs/rss": "^4.0.17",
+        "@astrojs/sitemap": "^3.7.1",
         "@fontsource-variable/fira-code": "^5.2.5",
         "@fontsource-variable/inter": "^5.2.5",
         "@fontsource-variable/literata": "^5.2.5",
         "@tailwindcss/vite": "^4.1.7",
-        "astro": "^5.10.0",
-        "astro-auto-import": "^0.4.4",
+        "astro": "^6.0.8",
+        "astro-auto-import": "^0.5.1",
         "sharp": "^0.33.0",
         "simple-icons": "^15.13.0",
         "tailwindcss": "^4.1.7"
