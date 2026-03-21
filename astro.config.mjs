@@ -3,7 +3,12 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import AutoImport from 'astro-auto-import';
 import { defineConfig } from 'astro/config';
+import { readFileSync } from 'node:fs';
 import mkcert from 'vite-plugin-mkcert';
+
+const { version } = JSON.parse(readFileSync('./package.json', 'utf-8'));
+
+const buildTimestamp = new Date().toISOString();
 
 export default defineConfig({
     site: 'https://dickwyn.com',
@@ -34,5 +39,9 @@ export default defineConfig({
     },
     vite: {
         plugins: [tailwindcss(), mkcert()],
+        define: {
+            'import.meta.env.PUBLIC_BUILD_TIMESTAMP': JSON.stringify(buildTimestamp),
+            'import.meta.env.PUBLIC_SITE_VERSION': JSON.stringify(version),
+        },
     },
 });

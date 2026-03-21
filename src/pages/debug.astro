@@ -1,9 +1,38 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const version = import.meta.env.PUBLIC_SITE_VERSION;
+const buildTimestamp = import.meta.env.PUBLIC_BUILD_TIMESTAMP;
 ---
 
 <Base title="Debug">
 	<div>
 		<h1>Debug</h1>
+		<ul class="mt-4 space-y-1 text-sm">
+			<li><strong>Version:</strong> {version}</li>
+			<li><strong>Build Timestamp:</strong> <span id="build-timestamp">{buildTimestamp}</span></li>
+		</ul>
 	</div>
 </Base>
+
+<script>
+	const el = document.getElementById('build-timestamp');
+	if (el) {
+		const raw = el.textContent?.trim();
+		if (raw) {
+			const date = new Date(raw);
+			if (!Number.isNaN(date.getTime())) {
+				el.textContent = date.toLocaleString(undefined, {
+					weekday: 'short',
+					month: 'short',
+					day: 'numeric',
+					year: 'numeric',
+					hour: 'numeric',
+					minute: '2-digit',
+					second: '2-digit',
+					timeZoneName: 'short',
+				});
+			}
+		}
+	}
+</script>
