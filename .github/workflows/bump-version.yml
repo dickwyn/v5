@@ -16,14 +16,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Enable corepack
+        run: corepack enable
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
-          cache: 'npm'
+          cache: 'pnpm'
 
-      - name: Enable corepack
-        run: corepack enable
       - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
@@ -42,9 +43,7 @@ jobs:
           fi
 
       - name: Bump version
-        run: |
-          corepack enable
-          pnpm version ${{ steps.bump-level.outputs.level }} --no-git-tag-version
+        run: pnpm version ${{ steps.bump-level.outputs.level }} --no-git-tag-version
 
       - name: Commit and push
         run: |
