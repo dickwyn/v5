@@ -34,7 +34,7 @@ jobs:
         env:
           COMMIT_MSG: ${{ github.event.head_commit.message }}
         run: |
-          TYPE=$(printf '%s\n' "$COMMIT_MSG" | head -n 1 | sed -n 's/^\([a-z]*\).*/\1/p')
+          TYPE=$(printf '%s\n' "$COMMIT_MSG" | sed -n 's/^\([a-z]\+\)[^a-z].*/\1/p' | head -n 1)
           if [ "$TYPE" = "feat" ]; then
             echo "level=minor" >> "$GITHUB_OUTPUT"
           else
