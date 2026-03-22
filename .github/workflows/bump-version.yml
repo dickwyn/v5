@@ -23,9 +23,10 @@ jobs:
 
       - name: Determine version bump level
         id: bump-level
+        env:
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
         run: |
-          COMMIT_MSG="${{ github.event.head_commit.message }}"
-          TYPE=$(echo "$COMMIT_MSG" | head -1 | sed -n 's/^\([a-z]*\).*/\1/p')
+          TYPE=$(printf '%s\n' "$COMMIT_MSG" | head -n 1 | sed -n 's/^\([a-z]*\).*/\1/p')
           if [ "$TYPE" = "feat" ]; then
             echo "level=minor" >> "$GITHUB_OUTPUT"
           else
