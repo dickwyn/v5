@@ -1,0 +1,53 @@
+name: Bump Version
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'chore: bump version')"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+
+      - name: Enable corepack
+        run: corepack enable
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Determine version bump level
+        id: bump-level
+        env:
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+        run: |
+          TYPE=$(printf '%s\n' "$COMMIT_MSG" | sed -n 's/^\([a-z]\+\)[^a-z].*/\1/p' | head -n 1)
+          if [ "$TYPE" = "feat" ]; then
+            echo "level=minor" >> "$GITHUB_OUTPUT"
+          else
+            echo "level=patch" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Bump version
+        run: |
+          corepack enable
+          pnpm version ${{ steps.bump-level.outputs.level }} --no-git-tag-version
+
+      - name: Commit and push
+        run: |
+          git add package.json
+          git commit -m "chore: bump version"
+          git push
