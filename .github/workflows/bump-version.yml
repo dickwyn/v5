@@ -33,7 +33,9 @@ jobs:
           fi
 
       - name: Bump version
-        run: npm version ${{ steps.bump-level.outputs.level }} --no-git-tag-version
+        run: |
+          corepack enable
+          pnpm version ${{ steps.bump-level.outputs.level }} --no-git-tag-version
 
       - name: Commit and push
         run: |
