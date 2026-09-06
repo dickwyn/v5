@@ -4,15 +4,17 @@ interface Props {
 	alt?: string;
 	caption?: string;
 	className?: string;
+	width?: string;
+	height?: string;
 }
 
-const { src, alt = '', caption, className = '' } = Astro.props;
+const { src, alt = '', caption, className = '', width, height } = Astro.props;
 ---
 
 {
 	src ? (
 		<figure class={className}>
-			<img src={src} alt={alt} loading="lazy" class="rounded-lg" />
+			<img src={src} alt={alt} loading="lazy" class="rounded-lg" width={width} height={height} />
 			{caption ? <figcaption>{caption}</figcaption> : null}
 		</figure>
 	) : (
