@@ -4,7 +4,7 @@ import Base from '../../layouts/Base.astro';
 import { formatDate } from '../../utils';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
+	const posts = (await getCollection('blog')).filter((post) => import.meta.env.DEV || !post.data.draft);
 	const publishedPosts = posts
 		.filter((p) => !p.data.draft)
 		.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
