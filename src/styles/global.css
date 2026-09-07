@@ -288,3 +288,21 @@ a.post-tag:hover {
         @apply opacity-100;
     }
 }
+
+/* ---------- Copy markdown ---------- */
+
+.copy-markdown {
+    @apply inline-flex cursor-pointer items-center gap-1.5 text-inherit transition-colors;
+
+    &:hover:not(:disabled) {
+        @apply text-brand;
+    }
+
+    &:disabled {
+        @apply cursor-default;
+    }
+}
+
+.copy-icon {
+    @apply h-3.5 w-3.5;
+}

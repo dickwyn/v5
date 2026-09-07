@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import CopyMarkdown from '../../components/CopyMarkdown.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import { buildToc, formatDate } from '../../utils';
 
@@ -41,9 +42,11 @@ const toc = buildToc(headings);
 <Base title={post.data.title} description={post.data.description} ogImage={ogImage}>
 	<section>
 		<div class="flex justify-between items-center my-2 text-sm">
-			<p class="text-sm text-neutral-600 dark:text-neutral-400">
-				{formatDate(post.data.date)}
-			</p>
+			<div class="post-meta">
+				<time datetime={post.data.date}>{formatDate(post.data.date)}</time>
+				<span class="post-meta-dot" aria-hidden="true">·</span>
+				<CopyMarkdown slug={post.data.slug} />
+			</div>
 		</div>
 		<h1 class="text-balance font-semibold text-2xl tracking-tighter">
 			{post.data.title}
