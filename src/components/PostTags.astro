@@ -1,0 +1,28 @@
+---
+import { tagSlug } from '../utils';
+
+interface Props {
+	tags: string[];
+	activeTag?: string;
+}
+
+const { tags, activeTag } = Astro.props;
+---
+
+{
+	tags.length > 0 && (
+		<ul class="post-tags">
+			{tags.map((tag) => (
+				<li>
+					<a
+						href={`/blog/tags/${tagSlug(tag)}`}
+						class="post-tag"
+						aria-current={activeTag === tagSlug(tag) ? 'page' : undefined}
+					>
+						{tag}
+					</a>
+				</li>
+			))}
+		</ul>
+	)
+}

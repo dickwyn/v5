@@ -1,3 +1,4 @@
+import { slug } from 'github-slugger';
 import getReadingTime from 'reading-time';
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
@@ -11,3 +12,5 @@ export const formatDate = (date: string) =>
     dateFormatter.format(new Date(date.includes('T') ? date : `${date}T00:00:00Z`));
 
 export const readingTime = (body: string) => getReadingTime(body).text;
+
+export const tagSlug = (tag: string) => slug(tag);

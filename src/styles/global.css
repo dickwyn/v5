@@ -167,3 +167,55 @@ code {
 .post-card-description {
     @apply mt-1.5 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300;
 }
+
+/* ---------- Post tags ---------- */
+
+.post-tags {
+    @apply mt-3 flex list-none flex-wrap gap-2 p-0;
+}
+
+.post-tag {
+    @apply block rounded-full border border-neutral-200 px-2.5 py-0.5 text-xs tracking-wide text-neutral-600 uppercase !no-underline transition-colors dark:border-neutral-800 dark:text-neutral-400;
+}
+
+a.post-tag:hover {
+    @apply border-brand text-brand;
+}
+
+.post-card .post-tags {
+    @apply relative z-10;
+}
+
+/* ---------- Tag filter + tag pages ---------- */
+
+.post-tag[aria-current='page'] {
+    @apply border-brand text-brand;
+}
+
+.tag-header {
+    @apply mb-8 border-b border-neutral-200 pb-6 dark:border-neutral-800;
+}
+
+.tag-eyebrow {
+    @apply mb-2 text-sm text-neutral-500 dark:text-neutral-400;
+
+    a {
+        @apply !no-underline;
+    }
+
+    a:hover {
+        @apply text-brand;
+    }
+}
+
+.tag-title {
+    @apply font-serif text-3xl font-semibold tracking-tight text-balance;
+}
+
+.tag-title-name {
+    @apply text-brand;
+}
+
+.tag-count {
+    @apply mt-2 text-sm text-neutral-600 dark:text-neutral-400;
+}

@@ -1,12 +1,14 @@
 ---
 import { formatDate, readingTime } from '../utils';
+import PostTags from './PostTags.astro';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
 	posts: CollectionEntry<'blog'>[];
+	activeTag?: string;
 }
 
-const { posts } = Astro.props;
+const { posts, activeTag } = Astro.props;
 ---
 
 <div class="grid gap-2">
@@ -27,6 +29,7 @@ const { posts } = Astro.props;
 				</h2>
 				{post.data.subtitle && <p class="post-card-subtitle">{post.data.subtitle}</p>}
 				{post.data.description && <p class="post-card-description">{post.data.description}</p>}
+				<PostTags tags={post.data.tags} activeTag={activeTag} />
 			</article>
 		))
 	}
