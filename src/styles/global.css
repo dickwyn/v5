@@ -66,8 +66,7 @@ code {
     }
 }
 
-/* ---------- Post header ---------- */
-
+/* #region Post header */
 .post-header {
     @apply mb-10 border-b border-neutral-200 pb-6 dark:border-neutral-800;
 }
@@ -111,9 +110,9 @@ a.post-tag:hover {
 .copy-icon {
     @apply h-3.5 w-3.5;
 }
+/* #endregion */
 
-/* ---------- Post layout + sidebar ---------- */
-
+/* #region Post layout + sidebar */
 .post-layout {
     @apply relative;
 }
@@ -156,9 +155,9 @@ a.post-tag:hover {
 .toc-link-active {
     @apply font-medium text-neutral-900 dark:text-neutral-100;
 }
+/* #endregion */
 
-/* ---------- Post list cards ---------- */
-
+/* #region Post list cards */
 .post-card {
     @apply relative -mx-4 rounded-lg px-4 py-4 transition-colors duration-200;
 
@@ -210,9 +209,9 @@ a.post-tag:hover {
 .post-card-description {
     @apply mt-1.5 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300;
 }
+/* #endregion */
 
-/* ---------- Tag filter + tag pages ---------- */
-
+/* #region Tag filter + tag pages */
 .post-tag[aria-current='page'] {
     @apply border-brand text-brand;
 }
@@ -244,9 +243,9 @@ a.post-tag:hover {
 .tag-count {
     @apply mt-2 text-sm text-neutral-600 dark:text-neutral-400;
 }
+/* #endregion */
 
-/* ---------- Post pager ---------- */
-
+/* #region Post pager */
 .post-pager {
     @apply mt-16 grid grid-cols-1 gap-6 border-t border-neutral-200 pt-6 sm:grid-cols-2 dark:border-neutral-800;
 }
@@ -258,9 +257,9 @@ a.post-tag:hover {
 .post-pager-label {
     @apply mb-1 block text-xs tracking-widest text-neutral-500 uppercase dark:text-neutral-400;
 }
+/* #endregion */
 
-/* ---------- Article body ---------- */
-
+/* #region Article body */
 .blog {
     @apply font-serif;
 
@@ -395,9 +394,9 @@ a.post-tag:hover {
         @apply !mt-0;
     }
 }
+/* #endregion */
 
-/* ---------- Heading anchors ---------- */
-
+/* #region Heading anchors */
 .heading-anchor {
     @apply ml-2 inline-flex h-[0.85em] w-[0.85em] translate-y-[-0.05em] items-center justify-center align-middle text-neutral-400 no-underline opacity-0 transition-opacity dark:text-neutral-600;
 
@@ -415,3 +414,4 @@ a.post-tag:hover {
         @apply opacity-100;
     }
 }
+/* #endregion */
