@@ -22,13 +22,24 @@
 
 html {
     min-width: 360px;
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+:target {
+    scroll-margin-top: 5rem;
 }
 
 table {
     display: block;
     max-width: fit-content;
     overflow-x: auto;
-    white-space: nowrap;
 }
 
 a {
@@ -55,60 +66,19 @@ code {
     }
 }
 
-.blog {
-    @apply font-serif;
+/* ---------- Post header ---------- */
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p {
-        font-feature-settings:
-            'liga' 1,
-            'kern' 1;
-    }
-
-    p {
-        @apply my-4 leading-7 text-neutral-800 dark:text-neutral-200;
-    }
-
-    h1 {
-        @apply mt-6 mb-2 text-4xl font-medium tracking-tight;
-    }
-
-    h2 {
-        @apply mt-6 mb-2 text-xl font-medium tracking-tight;
-    }
-
-    h3 {
-        @apply mt-6 mb-2 text-xl font-medium tracking-tight;
-    }
-
-    h4 {
-        @apply mt-6 mb-2 text-lg font-medium tracking-tight;
-    }
-
-    strong {
-        @apply font-medium;
-    }
-
-    ul {
-        @apply list-disc pl-6;
-    }
-
-    ol {
-        @apply list-decimal pl-6;
-    }
-
-    > :first-child {
-        margin-top: 1.25em !important;
-        margin-bottom: 1.25em !important;
-    }
+.post-header {
+    @apply mb-10 border-b border-neutral-200 pb-6 dark:border-neutral-800;
 }
 
-/* ---------- Post meta ---------- */
+.post-title {
+    @apply font-serif text-3xl leading-[1.15] font-semibold tracking-tight text-balance sm:text-4xl;
+}
+
+.post-subtitle {
+    @apply mt-3 font-serif text-lg leading-snug text-balance text-neutral-600 italic dark:text-neutral-400;
+}
 
 .post-meta {
     @apply mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-neutral-600 dark:text-neutral-400;
@@ -116,6 +86,75 @@ code {
 
 .post-meta-dot {
     @apply text-neutral-400 dark:text-neutral-600;
+}
+
+.post-tags {
+    @apply mt-3 flex list-none flex-wrap gap-2 p-0;
+}
+
+.post-tag {
+    @apply block rounded-full border border-neutral-200 px-2.5 py-0.5 text-xs tracking-wide text-neutral-600 uppercase !no-underline transition-colors dark:border-neutral-800 dark:text-neutral-400;
+}
+
+a.post-tag:hover {
+    @apply border-brand text-brand;
+}
+
+.copy-markdown {
+    @apply inline-flex cursor-pointer items-center gap-1.5 text-inherit transition-colors;
+
+    &:hover {
+        @apply text-brand;
+    }
+}
+
+.copy-icon {
+    @apply h-3.5 w-3.5;
+}
+
+/* ---------- Post layout + sidebar ---------- */
+
+.post-layout {
+    @apply relative;
+}
+
+.post-sidebar {
+    @apply hidden;
+}
+
+@media (min-width: 1180px) {
+    .post-sidebar {
+        @apply absolute top-0 block h-full w-52;
+        left: calc(100% + 3rem);
+    }
+}
+
+.toc {
+    @apply sticky top-8 max-h-[calc(100vh-6rem)] overflow-y-auto border-l border-neutral-200 pl-4 text-sm dark:border-neutral-800;
+}
+
+.toc-heading {
+    @apply text-xs font-medium tracking-widest text-neutral-500 uppercase dark:text-neutral-400;
+}
+
+.toc-list {
+    @apply mt-3 list-none space-y-1.5 p-0;
+}
+
+.toc-item-nested {
+    @apply pl-4;
+}
+
+.toc-link {
+    @apply block leading-snug text-neutral-600 no-underline dark:text-neutral-400;
+
+    &:hover {
+        @apply text-brand;
+    }
+}
+
+.toc-link-active {
+    @apply font-medium text-neutral-900 dark:text-neutral-100;
 }
 
 /* ---------- Post list cards ---------- */
@@ -148,6 +187,10 @@ code {
     @apply absolute inset-0 z-0 rounded-lg;
 }
 
+.post-card .post-tags {
+    @apply relative z-10;
+}
+
 .post-card-title {
     @apply mt-1.5 font-serif text-xl font-semibold tracking-tight text-balance;
 
@@ -166,24 +209,6 @@ code {
 
 .post-card-description {
     @apply mt-1.5 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300;
-}
-
-/* ---------- Post tags ---------- */
-
-.post-tags {
-    @apply mt-3 flex list-none flex-wrap gap-2 p-0;
-}
-
-.post-tag {
-    @apply block rounded-full border border-neutral-200 px-2.5 py-0.5 text-xs tracking-wide text-neutral-600 uppercase !no-underline transition-colors dark:border-neutral-800 dark:text-neutral-400;
-}
-
-a.post-tag:hover {
-    @apply border-brand text-brand;
-}
-
-.post-card .post-tags {
-    @apply relative z-10;
 }
 
 /* ---------- Tag filter + tag pages ---------- */
@@ -220,53 +245,155 @@ a.post-tag:hover {
     @apply mt-2 text-sm text-neutral-600 dark:text-neutral-400;
 }
 
-/* ---------- Post layout + sidebar ---------- */
+/* ---------- Post pager ---------- */
 
-.post-layout {
-    @apply relative;
+.post-pager {
+    @apply mt-16 grid grid-cols-1 gap-6 border-t border-neutral-200 pt-6 sm:grid-cols-2 dark:border-neutral-800;
 }
 
-.post-sidebar {
-    @apply hidden;
+.post-pager-older {
+    @apply sm:text-right;
 }
 
-.post-body {
-    @apply min-w-0;
+.post-pager-label {
+    @apply mb-1 block text-xs tracking-widest text-neutral-500 uppercase dark:text-neutral-400;
 }
 
-@media (min-width: 1180px) {
-    .post-sidebar {
-        @apply absolute top-0 block h-full w-52;
-        left: calc(100% + 3rem);
+/* ---------- Article body ---------- */
+
+.blog {
+    @apply font-serif;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+        font-feature-settings:
+            'liga' 1,
+            'kern' 1;
     }
-}
 
-.toc {
-    @apply sticky top-8 max-h-[calc(100vh-6rem)] overflow-y-auto border-l border-neutral-200 pl-4 text-sm dark:border-neutral-800;
-}
-
-.toc-heading {
-    @apply text-xs font-medium tracking-widest text-neutral-500 uppercase;
-}
-
-.toc-list {
-    @apply mt-3 list-none space-y-1.5 p-0;
-}
-
-.toc-item-nested {
-    @apply pl-4;
-}
-
-.toc-link {
-    @apply block leading-snug text-neutral-600 no-underline dark:text-neutral-400;
-
-    &:hover {
-        @apply text-brand;
+    p {
+        @apply my-5 text-[1.0625rem] leading-[1.75] text-neutral-800 dark:text-neutral-200;
     }
-}
 
-.toc-link-active {
-    @apply font-medium text-neutral-900 dark:text-neutral-100;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-semibold tracking-tight text-balance;
+    }
+
+    h1 {
+        @apply mt-12 mb-3 text-3xl;
+    }
+
+    h2 {
+        @apply mt-12 mb-3 text-2xl;
+    }
+
+    h3 {
+        @apply mt-9 mb-2 text-xl;
+    }
+
+    h4 {
+        @apply mt-8 mb-2 text-lg;
+    }
+
+    h5 {
+        @apply mt-6 mb-2 text-base;
+    }
+
+    h6 {
+        @apply mt-6 mb-2 text-sm tracking-wide text-neutral-600 uppercase dark:text-neutral-400;
+    }
+
+    strong {
+        @apply font-semibold;
+    }
+
+    ul {
+        @apply my-5 list-disc space-y-2 pl-6;
+    }
+
+    ol {
+        @apply my-5 list-decimal space-y-2 pl-6;
+    }
+
+    li {
+        @apply leading-[1.7] text-neutral-800 dark:text-neutral-200;
+
+        & > ul,
+        & > ol {
+            @apply my-2;
+        }
+    }
+
+    blockquote {
+        @apply border-brand my-6 border-l-2 py-1 pl-5 text-neutral-600 italic dark:text-neutral-400;
+
+        p {
+            @apply my-2;
+        }
+    }
+
+    hr {
+        @apply my-12 border-neutral-200 dark:border-neutral-800;
+    }
+
+    img {
+        @apply my-6 rounded-lg;
+    }
+
+    figcaption {
+        @apply mt-2 text-center text-sm text-neutral-500 dark:text-neutral-400;
+    }
+
+    pre:not(.astro-code) {
+        @apply my-4 overflow-x-auto rounded-lg border border-neutral-200 p-3 font-mono text-sm dark:border-neutral-800;
+    }
+
+    table {
+        @apply my-6 text-sm;
+    }
+
+    th,
+    td {
+        @apply border-b border-neutral-200 px-3 py-2 text-left dark:border-neutral-800;
+    }
+
+    th {
+        @apply font-semibold;
+    }
+
+    dt {
+        @apply mt-3 font-semibold;
+    }
+
+    dd {
+        @apply text-neutral-700 dark:text-neutral-300;
+    }
+
+    kbd {
+        @apply rounded border border-neutral-300 bg-neutral-100 px-1.5 py-0.5 font-mono text-xs dark:border-neutral-700 dark:bg-neutral-800;
+    }
+
+    mark {
+        @apply rounded bg-yellow-100 px-1 text-black dark:bg-yellow-200;
+    }
+
+    &.has-drop-cap > p:first-child::first-letter {
+        @apply text-brand float-left mt-1.5 mr-2 font-serif text-[3.25rem] leading-[0.8] font-semibold;
+    }
+
+    > :first-child {
+        @apply !mt-0;
+    }
 }
 
 /* ---------- Heading anchors ---------- */
@@ -287,22 +414,4 @@ a.post-tag:hover {
     .heading-anchor {
         @apply opacity-100;
     }
-}
-
-/* ---------- Copy markdown ---------- */
-
-.copy-markdown {
-    @apply inline-flex cursor-pointer items-center gap-1.5 text-inherit transition-colors;
-
-    &:hover:not(:disabled) {
-        @apply text-brand;
-    }
-
-    &:disabled {
-        @apply cursor-default;
-    }
-}
-
-.copy-icon {
-    @apply h-3.5 w-3.5;
 }

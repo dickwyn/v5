@@ -2,8 +2,9 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import CopyMarkdown from '../../components/CopyMarkdown.astro';
+import PostTags from '../../components/PostTags.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
-import { buildToc, formatDate } from '../../utils';
+import { buildToc, formatDate, readingTime } from '../../utils';
 
 export async function getStaticPaths() {
 	const posts = (await getCollection('blog')).filter((post) => import.meta.env.DEV || !post.data.draft);
@@ -37,47 +38,52 @@ const ogImage = post.data.image
 	: undefined;
 
 const toc = buildToc(headings);
+const readTime = readingTime(post.body ?? '');
 ---
 
 <Base title={post.data.title} description={post.data.description} ogImage={ogImage}>
-	<section>
-		<div class="flex justify-between items-center my-2 text-sm">
+	<article>
+		<header class="post-header">
+			<h1 class="post-title">{post.data.title}</h1>
+			{post.data.subtitle && <p class="post-subtitle">{post.data.subtitle}</p>}
 			<div class="post-meta">
 				<time datetime={post.data.date}>{formatDate(post.data.date)}</time>
 				<span class="post-meta-dot" aria-hidden="true">·</span>
+				<span>{readTime}</span>
+				<span class="post-meta-dot" aria-hidden="true">·</span>
 				<CopyMarkdown slug={post.data.slug} />
 			</div>
-		</div>
-		<h1 class="text-balance font-semibold text-2xl tracking-tighter">
-			{post.data.title}
-		</h1>
+			<PostTags tags={post.data.tags} />
+		</header>
+
 		<div class="post-layout">
-			<div class="blog post-body">
+			{
+				toc.length > 0 && (
+					<aside class="post-sidebar">
+						<TableOfContents headings={toc} />
+					</aside>
+				)
+			}
+			<div class:list={['blog', { 'has-drop-cap': post.data.dropCap }]}>
 				<Content />
 			</div>
-			<aside class="post-sidebar">
-				<TableOfContents headings={toc} />
-			</aside>
 		</div>
+
 		{
 			(newerPost || olderPost) && (
-				<nav class="mt-12 pt-6 border-t border-neutral-200 dark:border-neutral-800 grid grid-cols-2 gap-4">
+				<nav class="post-pager">
 					<div>
 						{newerPost && (
 							<>
-								<span class="block text-xs uppercase tracking-wide text-neutral-500">
-									Newer
-								</span>
+								<span class="post-pager-label">Newer</span>
 								<a href={`/blog/${newerPost.slug}`}>{newerPost.title}</a>
 							</>
 						)}
 					</div>
-					<div class="text-right">
+					<div class="post-pager-older">
 						{olderPost && (
 							<>
-								<span class="block text-xs uppercase tracking-wide text-neutral-500">
-									Older
-								</span>
+								<span class="post-pager-label">Older</span>
 								<a href={`/blog/${olderPost.slug}`}>{olderPost.title}</a>
 							</>
 						)}
@@ -85,5 +91,5 @@ const toc = buildToc(headings);
 				</nav>
 			)
 		}
-	</section>
+	</article>
 </Base>

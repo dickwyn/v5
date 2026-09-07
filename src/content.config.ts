@@ -12,6 +12,7 @@ const blog = defineCollection({
         subtitle: z.string().optional(),
         image: z.string().optional(),
         tags: z.array(z.string()).default([]),
+        dropCap: z.boolean().default(true),
         draft: z.boolean().optional().default(false),
     }),
 });
