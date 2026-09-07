@@ -1,0 +1,76 @@
+---
+import type { MarkdownHeading } from '@astrojs/markdown-remark';
+
+interface Props {
+	headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+---
+
+{
+	headings.length > 0 && (
+		<nav class="toc" aria-labelledby="toc-heading">
+			<h2 id="toc-heading" class="toc-heading">
+				On this page
+			</h2>
+			<ul class="toc-list">
+				{headings.map((heading) => (
+					<li class={heading.depth === 3 ? 'toc-item-nested' : undefined}>
+						<a href={`#${heading.slug}`} class="toc-link">
+							{heading.text}
+						</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+	)
+}
+
+<script>
+	const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.toc-link'));
+
+	if (links.length > 0) {
+		const targets = links
+			.map((link) => document.getElementById(decodeURIComponent(link.hash.slice(1))))
+			.filter((el): el is HTMLElement => el !== null);
+
+		const setActive = (id: string | null) => {
+			for (const link of links) {
+				const isActive = id !== null && decodeURIComponent(link.hash.slice(1)) === id;
+
+				link.classList.toggle('toc-link-active', isActive);
+
+				if (isActive) {
+					link.setAttribute('aria-current', 'location');
+				} else {
+					link.removeAttribute('aria-current');
+				}
+			}
+		};
+
+		let frame = 0;
+
+		const update = () => {
+			frame = 0;
+
+			let active: HTMLElement | null = null;
+
+			for (const target of targets) {
+				if (target.getBoundingClientRect().top <= 80) {
+					active = target;
+				}
+			}
+
+			setActive(active?.id ?? null);
+		};
+
+		const schedule = () => {
+			frame ||= requestAnimationFrame(update);
+		};
+
+		update();
+		addEventListener('scroll', schedule, { passive: true });
+		addEventListener('resize', schedule, { passive: true });
+	}
+</script>

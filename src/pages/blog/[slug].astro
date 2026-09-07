@@ -1,7 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import { formatDate } from '../../utils';
+import TableOfContents from '../../components/TableOfContents.astro';
+import { buildToc, formatDate } from '../../utils';
 
 export async function getStaticPaths() {
 	const posts = (await getCollection('blog')).filter((post) => import.meta.env.DEV || !post.data.draft);
@@ -26,13 +27,15 @@ export async function getStaticPaths() {
 }
 
 const { post, newerPost, olderPost } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 const baseUrl = 'https://dickwyn.com';
 const ogImage = post.data.image
 	? post.data.image.startsWith('http')
 		? post.data.image
 		: `${baseUrl}${post.data.image}`
 	: undefined;
+
+const toc = buildToc(headings);
 ---
 
 <Base title={post.data.title} description={post.data.description} ogImage={ogImage}>
@@ -45,9 +48,14 @@ const ogImage = post.data.image
 		<h1 class="text-balance font-semibold text-2xl tracking-tighter">
 			{post.data.title}
 		</h1>
-		<article class="blog">
-			<Content />
-		</article>
+		<div class="post-layout">
+			<div class="blog post-body">
+				<Content />
+			</div>
+			<aside class="post-sidebar">
+				<TableOfContents headings={toc} />
+			</aside>
+		</div>
 		{
 			(newerPost || olderPost) && (
 				<nav class="mt-12 pt-6 border-t border-neutral-200 dark:border-neutral-800 grid grid-cols-2 gap-4">
