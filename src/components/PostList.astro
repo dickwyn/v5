@@ -1,0 +1,33 @@
+---
+import { formatDate, readingTime } from '../utils';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<div class="grid gap-2">
+	{
+		posts.map((post) => (
+			<article class="post-card">
+				<div class="post-meta">
+					<time datetime={post.data.date}>{formatDate(post.data.date)}</time>
+					<span class="post-meta-dot" aria-hidden="true">
+						·
+					</span>
+					<span>{readingTime(post.body ?? '')}</span>
+				</div>
+				<h2 class="post-card-title">
+					<a href={`/blog/${post.data.slug}`} class="post-card-link">
+						{post.data.title}
+					</a>
+				</h2>
+				{post.data.subtitle && <p class="post-card-subtitle">{post.data.subtitle}</p>}
+				{post.data.description && <p class="post-card-description">{post.data.description}</p>}
+			</article>
+		))
+	}
+</div>

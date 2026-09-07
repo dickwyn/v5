@@ -107,3 +107,63 @@ code {
         margin-bottom: 1.25em !important;
     }
 }
+
+/* ---------- Post meta ---------- */
+
+.post-meta {
+    @apply mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-neutral-600 dark:text-neutral-400;
+}
+
+.post-meta-dot {
+    @apply text-neutral-400 dark:text-neutral-600;
+}
+
+/* ---------- Post list cards ---------- */
+
+.post-card {
+    @apply relative -mx-4 rounded-lg px-4 py-4 transition-colors duration-200;
+
+    > .post-meta:first-child {
+        @apply mt-0;
+    }
+
+    &:hover {
+        background-color: var(--color-brand-hover);
+    }
+
+    &:has(.post-card-link:focus-visible) {
+        background-color: var(--color-brand-hover);
+        outline: 2px solid var(--color-brand);
+        outline-offset: 2px;
+        @apply rounded-lg;
+    }
+}
+
+.post-card-link:focus-visible {
+    outline: none;
+}
+
+.post-card-link::after {
+    content: '';
+    @apply absolute inset-0 z-0 rounded-lg;
+}
+
+.post-card-title {
+    @apply mt-1.5 font-serif text-xl font-semibold tracking-tight text-balance;
+
+    a {
+        @apply text-neutral-900 !no-underline dark:text-neutral-100;
+    }
+
+    &:hover a {
+        @apply text-brand;
+    }
+}
+
+.post-card-subtitle {
+    @apply mt-1 font-serif text-base text-neutral-600 italic dark:text-neutral-400;
+}
+
+.post-card-description {
+    @apply mt-1.5 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300;
+}
