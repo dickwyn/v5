@@ -32,15 +32,15 @@ table {
 }
 
 a {
-    @apply underline decoration-brand underline-offset-3;
+    @apply decoration-brand underline underline-offset-3;
 
     &:hover {
-        @apply no-underline text-brand;
+        @apply text-brand no-underline;
     }
 }
 
 code {
-    @apply px-1 py-0.5 rounded-lg bg-neutral-100 dark:bg-neutral-800;
+    @apply rounded-lg bg-neutral-100 px-1 py-0.5 dark:bg-neutral-800;
 
     span {
         @apply font-medium;
@@ -48,7 +48,7 @@ code {
 }
 
 .astro-code {
-    @apply my-4 p-3 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-800;
+    @apply my-4 overflow-x-auto rounded-lg border border-neutral-200 p-3 dark:border-neutral-800;
 
     code {
         @apply bg-transparent p-0;
@@ -71,23 +71,23 @@ code {
     }
 
     p {
-        @apply my-4 text-neutral-800 dark:text-neutral-200 leading-7;
+        @apply my-4 leading-7 text-neutral-800 dark:text-neutral-200;
     }
 
     h1 {
-        @apply text-4xl font-medium tracking-tight mt-6 mb-2;
+        @apply mt-6 mb-2 text-4xl font-medium tracking-tight;
     }
 
     h2 {
-        @apply text-xl font-medium tracking-tight mt-6 mb-2;
+        @apply mt-6 mb-2 text-xl font-medium tracking-tight;
     }
 
     h3 {
-        @apply text-xl font-medium tracking-tight mt-6 mb-2;
+        @apply mt-6 mb-2 text-xl font-medium tracking-tight;
     }
 
     h4 {
-        @apply text-lg font-medium tracking-tight mt-6 mb-2;
+        @apply mt-6 mb-2 text-lg font-medium tracking-tight;
     }
 
     strong {
