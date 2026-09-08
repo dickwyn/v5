@@ -10,14 +10,23 @@ const { headings } = Astro.props;
 
 {
 	headings.length > 0 && (
-		<nav class="toc" aria-labelledby="toc-heading">
-			<h2 id="toc-heading" class="toc-heading">
+		<nav
+			class="sticky top-8 max-h-[calc(100vh-6rem)] overflow-y-auto border-l border-neutral-200 pl-4 text-sm dark:border-neutral-800"
+			aria-labelledby="toc-heading"
+		>
+			<h2
+				id="toc-heading"
+				class="text-xs font-medium tracking-widest text-neutral-500 uppercase dark:text-neutral-400"
+			>
 				Table of contents
 			</h2>
-			<ul class="toc-list">
+			<ul class="mt-3 list-none space-y-1.5 p-0">
 				{headings.map((heading) => (
-					<li class={heading.depth === 3 ? 'toc-item-nested' : undefined}>
-						<a href={`#${heading.slug}`} class="toc-link">
+					<li class:list={[{ 'pl-4': heading.depth === 3 }]}>
+						<a
+							href={`#${heading.slug}`}
+							class="toc-link block leading-snug text-neutral-600 no-underline hover:text-brand dark:text-neutral-400"
+						>
 							{heading.text}
 						</a>
 					</li>
@@ -39,7 +48,9 @@ const { headings } = Astro.props;
 			for (const link of links) {
 				const isActive = id !== null && decodeURIComponent(link.hash.slice(1)) === id;
 
-				link.classList.toggle('toc-link-active', isActive);
+				link.classList.toggle('font-medium', isActive);
+				link.classList.toggle('text-neutral-900', isActive);
+				link.classList.toggle('dark:text-neutral-100', isActive);
 
 				if (isActive) {
 					link.setAttribute('aria-current', 'location');

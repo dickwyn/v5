@@ -8,8 +8,12 @@ interface Props {
 const { slug } = Astro.props;
 ---
 
-<button type="button" class="copy-markdown" data-slug={slug}>
-	<Copy class="copy-icon" size={14} aria-hidden="true" />
+<button
+	type="button"
+	class="copy-markdown inline-flex cursor-pointer items-center gap-1.5 text-inherit transition-colors hover:text-brand"
+	data-slug={slug}
+>
+	<Copy size={14} aria-hidden="true" />
 	<span class="copy-label" aria-live="polite">copy post</span>
 </button>
 

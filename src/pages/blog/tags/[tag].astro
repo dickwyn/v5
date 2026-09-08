@@ -35,14 +35,16 @@ const count = posts.length;
 	description={`${count} post${count === 1 ? '' : 's'} tagged "${label}".`}
 >
 	<section>
-		<header class="tag-header">
-			<p class="tag-eyebrow">
-				<a href="/blog">← All posts</a>
+		<header class="mb-8 border-b border-neutral-200 pb-6 dark:border-neutral-800">
+			<p class="mb-2 text-sm text-neutral-500 dark:text-neutral-400">
+				<a href="/blog" class="no-underline! hover:text-brand">← All posts</a>
 			</p>
-			<h1 class="tag-title">
-				Tagged <span class="tag-title-name">{label}</span>
+			<h1 class="font-serif text-3xl font-semibold tracking-tight text-balance">
+				Tagged <span class="text-brand">{label}</span>
 			</h1>
-			<p class="tag-count">{count} post{count === 1 ? '' : 's'}</p>
+			<p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+				{count} post{count === 1 ? '' : 's'}
+			</p>
 		</header>
 		<PostList posts={posts} activeTag={slug} />
 	</section>

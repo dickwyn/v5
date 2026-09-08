@@ -15,9 +15,9 @@ const { posts, activeTag } = Astro.props;
 	{
 		posts.map((post) => (
 			<article class="post-card relative -mx-4 rounded-lg px-4 py-4 transition-colors duration-200">
-				<div class="post-meta mt-0">
+				<div class="mt-0 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-neutral-600 dark:text-neutral-400">
 					<time datetime={post.data.date}>{formatDate(post.data.date)}</time>
-					<span class="post-meta-dot" aria-hidden="true">
+					<span class="text-neutral-400 dark:text-neutral-600" aria-hidden="true">
 						·
 					</span>
 					<span>{readingTime(post.body ?? '')}</span>
