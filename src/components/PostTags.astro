@@ -12,17 +12,23 @@ const { tags, activeTag } = Astro.props;
 {
 	tags.length > 0 && (
 		<ul class="post-tags">
-			{tags.map((tag) => (
-				<li>
-					<a
-						href={`/blog/tags/${tagSlug(tag)}`}
-						class="post-tag"
-						aria-current={activeTag === tagSlug(tag) ? 'page' : undefined}
-					>
-						{tag}
-					</a>
-				</li>
-			))}
+			{
+				tags.map((tag) => {
+					const slug = tagSlug(tag);
+
+					return (
+						<li>
+							<a
+								href={`/blog/tags/${slug}`}
+								class="post-tag"
+								aria-current={activeTag === slug ? 'page' : undefined}
+							>
+								{tag}
+							</a>
+						</li>
+					);
+				})
+			}
 		</ul>
 	)
 }
