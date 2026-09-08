@@ -92,7 +92,7 @@ code {
 }
 
 .post-tag {
-    @apply block rounded-full border border-neutral-200 px-2.5 py-0.5 text-xs tracking-wide text-neutral-600 uppercase !no-underline transition-colors dark:border-neutral-800 dark:text-neutral-400;
+    @apply block rounded-full border border-neutral-200 px-2.5 py-0.5 text-xs tracking-wide text-neutral-600 uppercase no-underline! transition-colors dark:border-neutral-800 dark:text-neutral-400;
 }
 
 a.post-tag:hover {
@@ -199,7 +199,7 @@ a.post-tag:hover {
     @apply mb-2 text-sm text-neutral-500 dark:text-neutral-400;
 
     a {
-        @apply !no-underline;
+        @apply no-underline!;
     }
 
     a:hover {
@@ -366,7 +366,7 @@ a.post-tag:hover {
     }
 
     > :first-child {
-        @apply !mt-0;
+        @apply mt-0!;
     }
 }
 /* #endregion */
