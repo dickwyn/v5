@@ -1,0 +1,48 @@
+---
+import getReadingTime from 'reading-time';
+import { formatDate } from '../utils';
+import PostTags from './PostTags.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	posts: CollectionEntry<'blog'>[];
+	activeTag?: string;
+}
+
+const { posts, activeTag } = Astro.props;
+---
+
+<div class="grid gap-2">
+	{
+		posts.map((post) => (
+			<article class="post-card relative -mx-4 rounded-lg px-4 py-4 transition-colors duration-200">
+				<div class="mt-0 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-neutral-600 dark:text-neutral-400">
+					<time datetime={post.data.date}>{formatDate(post.data.date)}</time>
+					<span class="text-neutral-400 dark:text-neutral-600" aria-hidden="true">
+						·
+					</span>
+					<span>{getReadingTime(post.body ?? '').text}</span>
+				</div>
+				<h2 class="mt-1.5 font-serif text-xl font-semibold tracking-tight text-balance">
+					<a
+						href={`/blog/${post.data.slug}`}
+						class="post-card-link text-neutral-900 no-underline! hover:text-brand dark:text-neutral-100"
+					>
+						{post.data.title}
+					</a>
+				</h2>
+				{post.data.subtitle && (
+					<p class="mt-1 font-serif text-base text-neutral-600 italic dark:text-neutral-400">
+						{post.data.subtitle}
+					</p>
+				)}
+				{post.data.description && (
+					<p class="mt-1.5 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+						{post.data.description}
+					</p>
+				)}
+				<PostTags tags={post.data.tags} activeTag={activeTag} />
+			</article>
+		))
+	}
+</div>

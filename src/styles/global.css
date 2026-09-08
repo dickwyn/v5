@@ -22,13 +22,24 @@
 
 html {
     min-width: 360px;
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+:target {
+    scroll-margin-top: 5rem;
 }
 
 table {
     display: block;
     max-width: fit-content;
     overflow-x: auto;
-    white-space: nowrap;
 }
 
 a {
@@ -55,6 +66,36 @@ code {
     }
 }
 
+/* #region Post list cards */
+.post-card {
+    &:hover {
+        background-color: var(--color-brand-hover);
+    }
+
+    &:has(.post-card-link:focus-visible) {
+        background-color: var(--color-brand-hover);
+        outline: 2px solid var(--color-brand);
+        outline-offset: 2px;
+        @apply rounded-lg;
+    }
+}
+
+.post-card-link:focus-visible {
+    outline: none;
+}
+
+.post-card-link::after {
+    content: '';
+    @apply absolute inset-0 z-0 rounded-lg;
+}
+
+.post-card .post-tags {
+    @apply relative z-10;
+}
+
+/* #endregion */
+
+/* #region Article body */
 .blog {
     @apply font-serif;
 
@@ -71,39 +112,142 @@ code {
     }
 
     p {
-        @apply my-4 leading-7 text-neutral-800 dark:text-neutral-200;
+        @apply my-5 text-[1.0625rem] leading-[1.75] text-neutral-800 dark:text-neutral-200;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-semibold tracking-tight text-balance;
     }
 
     h1 {
-        @apply mt-6 mb-2 text-4xl font-medium tracking-tight;
+        @apply mt-12 mb-3 text-3xl;
     }
 
     h2 {
-        @apply mt-6 mb-2 text-xl font-medium tracking-tight;
+        @apply mt-12 mb-3 text-2xl;
     }
 
     h3 {
-        @apply mt-6 mb-2 text-xl font-medium tracking-tight;
+        @apply mt-9 mb-2 text-xl;
     }
 
     h4 {
-        @apply mt-6 mb-2 text-lg font-medium tracking-tight;
+        @apply mt-8 mb-2 text-lg;
+    }
+
+    h5 {
+        @apply mt-6 mb-2 text-base;
+    }
+
+    h6 {
+        @apply mt-6 mb-2 text-sm tracking-wide text-neutral-600 uppercase dark:text-neutral-400;
     }
 
     strong {
-        @apply font-medium;
+        @apply font-semibold;
     }
 
     ul {
-        @apply list-disc pl-6;
+        @apply my-5 list-disc space-y-2 pl-6;
     }
 
     ol {
-        @apply list-decimal pl-6;
+        @apply my-5 list-decimal space-y-2 pl-6;
+    }
+
+    li {
+        @apply leading-[1.7] text-neutral-800 dark:text-neutral-200;
+
+        & > ul,
+        & > ol {
+            @apply my-2;
+        }
+    }
+
+    blockquote {
+        @apply border-brand my-6 border-l-2 py-1 pl-5 text-neutral-600 italic dark:text-neutral-400;
+
+        p {
+            @apply my-2;
+        }
+    }
+
+    hr {
+        @apply my-12 border-neutral-200 dark:border-neutral-800;
+    }
+
+    img {
+        @apply my-6 rounded-lg;
+    }
+
+    figcaption {
+        @apply mt-2 text-center text-sm text-neutral-500 dark:text-neutral-400;
+    }
+
+    pre:not(.astro-code) {
+        @apply my-4 overflow-x-auto rounded-lg border border-neutral-200 p-3 font-mono text-sm dark:border-neutral-800;
+    }
+
+    table {
+        @apply my-6 text-sm;
+    }
+
+    th,
+    td {
+        @apply border-b border-neutral-200 px-3 py-2 text-left dark:border-neutral-800;
+    }
+
+    th {
+        @apply font-semibold;
+    }
+
+    dt {
+        @apply mt-3 font-semibold;
+    }
+
+    dd {
+        @apply text-neutral-700 dark:text-neutral-300;
+    }
+
+    kbd {
+        @apply rounded border border-neutral-300 bg-neutral-100 px-1.5 py-0.5 font-mono text-xs dark:border-neutral-700 dark:bg-neutral-800;
+    }
+
+    mark {
+        @apply rounded bg-yellow-100 px-1 text-black dark:bg-yellow-200;
+    }
+
+    &.has-drop-cap > p:first-child::first-letter {
+        @apply text-brand float-left mt-1.5 mr-2 font-serif text-[3.25rem] leading-[0.8] font-semibold;
     }
 
     > :first-child {
-        margin-top: 1.25em !important;
-        margin-bottom: 1.25em !important;
+        @apply mt-0!;
     }
 }
+/* #endregion */
+
+/* #region Heading anchors */
+.heading-anchor {
+    @apply ml-2 inline-flex h-[0.85em] w-[0.85em] translate-y-[-0.05em] items-center justify-center align-middle text-neutral-400 no-underline opacity-0 transition-opacity dark:text-neutral-600;
+
+    svg {
+        @apply h-full w-full;
+    }
+}
+
+:is(h1, h2, h3, h4, h5, h6):hover .heading-anchor {
+    @apply text-brand opacity-100;
+}
+
+@media (hover: none) {
+    .heading-anchor {
+        @apply opacity-100;
+    }
+}
+/* #endregion */

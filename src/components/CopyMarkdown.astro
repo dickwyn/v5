@@ -1,0 +1,58 @@
+---
+import { Copy } from '@lucide/astro';
+
+interface Props {
+	slug: string;
+}
+
+const { slug } = Astro.props;
+---
+
+<button
+	type="button"
+	class="copy-markdown inline-flex cursor-pointer items-center gap-1.5 text-inherit transition-colors hover:text-brand"
+	data-slug={slug}
+>
+	<Copy size={14} aria-hidden="true" />
+	<span class="copy-label" aria-live="polite">copy post</span>
+</button>
+
+<script>
+	for (const button of document.querySelectorAll<HTMLButtonElement>('.copy-markdown')) {
+		const label = button.querySelector<HTMLElement>('.copy-label');
+		const slug = button.dataset.slug;
+
+		if (!label || !slug) {
+			continue;
+		}
+
+		let isCopying = false;
+
+		button.addEventListener('click', async () => {
+			if (isCopying) {
+				return;
+			}
+
+			isCopying = true;
+
+			try {
+				const response = await fetch(`/blog/${slug}.md`);
+
+				if (!response.ok) {
+					throw new Error(`Request failed: ${response.status}`);
+				}
+
+				await navigator.clipboard.writeText(await response.text());
+				label.textContent = 'copied!';
+			} catch (error) {
+				console.error('Failed to copy post markdown.', error);
+				label.textContent = 'Copy failed';
+			}
+
+			setTimeout(() => {
+				label.textContent = 'copy post';
+				isCopying = false;
+			}, 2000);
+		});
+	}
+</script>

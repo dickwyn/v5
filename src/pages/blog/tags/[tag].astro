@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import { slug as slugify } from 'github-slugger';
+import Base from '../../../layouts/Base.astro';
+import PostList from '../../../components/PostList.astro';
+
+export async function getStaticPaths() {
+	const posts = (await getCollection('blog'))
+		.filter((post) => !post.data.draft)
+		.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+	const byTag = new Map<string, { label: string; posts: typeof posts }>();
+
+	for (const post of posts) {
+		for (const tag of post.data.tags) {
+			const tagPath = slugify(tag);
+			const entry = byTag.get(tagPath) ?? { label: tag, posts: [] };
+			entry.posts.push(post);
+			byTag.set(tagPath, entry);
+		}
+	}
+
+	return [...byTag.entries()].map(([slug, { label, posts: tagged }]) => ({
+		params: { tag: slug },
+		props: { slug, label, posts: tagged },
+	}));
+}
+
+const { slug, label, posts } = Astro.props;
+const count = posts.length;
+---
+
+<Base
+	title={`Posts tagged "${label}"`}
+	description={`${count} post${count === 1 ? '' : 's'} tagged "${label}".`}
+>
+	<section>
+		<header class="mb-8 border-b border-neutral-200 pb-6 dark:border-neutral-800">
+			<p class="mb-2 text-sm text-neutral-500 dark:text-neutral-400">
+				<a href="/blog" class="no-underline! hover:text-brand">← All posts</a>
+			</p>
+			<h1 class="font-serif text-3xl font-semibold tracking-tight text-balance">
+				Tagged <span class="text-brand">{label}</span>
+			</h1>
+			<p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+				{count} post{count === 1 ? '' : 's'}
+			</p>
+		</header>
+		<PostList posts={posts} activeTag={slug} />
+	</section>
+</Base>
