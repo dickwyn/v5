@@ -25,7 +25,7 @@ const { headings } = Astro.props;
 					<li class:list={[{ 'pl-4': heading.depth === 3 }]}>
 						<a
 							href={`#${heading.slug}`}
-							class="toc-link block leading-snug text-neutral-600 no-underline hover:text-brand dark:text-neutral-400"
+							class="toc-link block leading-snug text-neutral-600 no-underline! hover:text-brand dark:text-neutral-400"
 						>
 							{heading.text}
 						</a>
