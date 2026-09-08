@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
+import { slug as slugify } from 'github-slugger';
 import Base from '../../../layouts/Base.astro';
 import PostList from '../../../components/PostList.astro';
-import { tagSlug } from '../../../utils';
 
 export async function getStaticPaths() {
 	const posts = (await getCollection('blog'))
@@ -13,10 +13,10 @@ export async function getStaticPaths() {
 
 	for (const post of posts) {
 		for (const tag of post.data.tags) {
-			const slug = tagSlug(tag);
-			const entry = byTag.get(slug) ?? { label: tag, posts: [] };
+			const tagPath = slugify(tag);
+			const entry = byTag.get(tagPath) ?? { label: tag, posts: [] };
 			entry.posts.push(post);
-			byTag.set(slug, entry);
+			byTag.set(tagPath, entry);
 		}
 	}
 

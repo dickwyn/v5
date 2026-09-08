@@ -1,5 +1,5 @@
 ---
-import { tagSlug } from '../utils';
+import { slug } from 'github-slugger';
 
 interface Props {
 	tags: string[];
@@ -14,15 +14,15 @@ const { tags, activeTag } = Astro.props;
 		<ul class="post-tags mt-3 flex list-none flex-wrap gap-2 p-0">
 			{
 				tags.map((tag) => {
-					const slug = tagSlug(tag);
+					const tagPath = slug(tag);
 
 					return (
 						<li>
 							<a
-								href={`/blog/tags/${slug}`}
+								href={`/blog/tags/${tagPath}`}
 								class="block rounded-full border border-neutral-200 px-2.5 py-0.5 text-xs tracking-wide text-neutral-600 uppercase no-underline! transition-colors hover:border-brand hover:text-brand dark:border-neutral-800 dark:text-neutral-400"
 								aria-[current=page]:border-brand aria-[current=page]:text-brand
-								aria-current={activeTag === slug ? 'page' : undefined}
+								aria-current={activeTag === tagPath ? 'page' : undefined}
 							>
 								{tag}
 							</a>

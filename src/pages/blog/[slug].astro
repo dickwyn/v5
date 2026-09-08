@@ -1,10 +1,11 @@
 ---
 import { getCollection, render } from 'astro:content';
+import getReadingTime from 'reading-time';
 import Base from '../../layouts/Base.astro';
 import CopyMarkdown from '../../components/CopyMarkdown.astro';
 import PostTags from '../../components/PostTags.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
-import { buildToc, formatDate, readingTime } from '../../utils';
+import { formatDate } from '../../utils';
 
 export async function getStaticPaths() {
 	const posts = (await getCollection('blog')).filter((post) => import.meta.env.DEV || !post.data.draft);
@@ -37,8 +38,13 @@ const ogImage = post.data.image
 		: `${baseUrl}${post.data.image}`
 	: undefined;
 
-const toc = buildToc(headings);
-const readTime = readingTime(post.body ?? '');
+const tocEntries = headings.filter((heading) => heading.depth <= 3);
+const minTocDepth = tocEntries.length > 0 ? Math.min(...tocEntries.map((entry) => entry.depth)) : 0;
+const toc = tocEntries.map((entry) => ({
+	...entry,
+	depth: Math.min(entry.depth - minTocDepth + 2, 3),
+}));
+const readTime = getReadingTime(post.body ?? '').text;
 ---
 
 <Base title={post.data.title} description={post.data.description} ogImage={ogImage}>
