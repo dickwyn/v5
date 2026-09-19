@@ -37,8 +37,11 @@
 	</button>
 </template>
 
+<div id="code-copy-status" class="sr-only" role="status" aria-live="polite"></div>
+
 <script>
 	const template = document.getElementById('code-copy-template') as HTMLTemplateElement | null;
+	const liveRegion = document.getElementById('code-copy-status');
 
 	document.querySelectorAll('pre.astro-code').forEach((pre) => {
 		if (!template || pre.querySelector('.code-copy-btn')) {
@@ -60,12 +63,20 @@
 			try {
 				await navigator.clipboard.writeText(code.innerText);
 				button.classList.add('copied');
+				button.setAttribute('aria-label', 'Copied!');
+
+				if (liveRegion) {
+					liveRegion.textContent = 'Code copied to clipboard';
+				}
 			} catch (error) {
 				console.error('Failed to copy code block.', error);
 				return;
 			}
 
-			setTimeout(() => button.classList.remove('copied'), 1500);
+			setTimeout(() => {
+				button.classList.remove('copied');
+				button.setAttribute('aria-label', 'Copy code');
+			}, 1500);
 		});
 	});
 </script>
