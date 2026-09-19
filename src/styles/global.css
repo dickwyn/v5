@@ -59,10 +59,39 @@ code {
 }
 
 .astro-code {
-    @apply my-4 overflow-x-auto rounded-lg border border-neutral-200 p-3 dark:border-neutral-800;
+    @apply relative my-4 overflow-x-auto rounded-lg border border-neutral-200 p-3 pr-10 dark:border-neutral-800;
 
     code {
         @apply bg-transparent p-0;
+    }
+}
+
+.code-copy-btn {
+    @apply hover:text-brand absolute top-2 right-2 z-10 inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-500 opacity-0 transition-opacity focus-visible:opacity-100 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400;
+
+    .check-icon {
+        @apply hidden text-green-600 dark:text-green-500;
+    }
+
+    &.copied {
+        .copy-icon {
+            @apply hidden;
+        }
+
+        .check-icon {
+            @apply block;
+        }
+    }
+}
+
+.code-block:hover .code-copy-btn,
+.code-block:focus-within .code-copy-btn {
+    @apply opacity-100;
+}
+
+@media (hover: none) {
+    .code-copy-btn {
+        @apply opacity-100;
     }
 }
 

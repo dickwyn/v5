@@ -1,7 +1,9 @@
 ---
 import { getCollection, render } from 'astro:content';
 import getReadingTime from 'reading-time';
+import { ArrowUp } from '@lucide/astro';
 import Base from '../../layouts/Base.astro';
+import CodeCopyButton from '../../components/CodeCopyButton.astro';
 import CopyMarkdown from '../../components/CopyMarkdown.astro';
 import PostTags from '../../components/PostTags.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
@@ -48,7 +50,14 @@ const readTime = getReadingTime(post.body ?? '').text;
 ---
 
 <Base title={post.data.title} description={post.data.description} ogImage={ogImage}>
-	<article>
+	<div
+		id="reading-progress"
+		class="fixed top-0 left-0 z-50 h-0.5 w-0 bg-brand transition-[width] duration-150 ease-out"
+		role="progressbar"
+		aria-hidden="true"
+	>
+	</div>
+	<article id="post-article">
 		<header class="mb-10 border-b border-neutral-200 pb-6 dark:border-neutral-800">
 			<h1 class="font-serif text-3xl leading-[1.15] font-semibold tracking-tight text-balance sm:text-4xl">
 				{post.data.title}
@@ -74,10 +83,13 @@ const readTime = getReadingTime(post.body ?? '').text;
 					<aside
 						class="hidden min-[1180px]:absolute min-[1180px]:top-0 min-[1180px]:left-[calc(100%+3rem)] min-[1180px]:block min-[1180px]:h-full min-[1180px]:w-52"
 					>
-						<TableOfContents headings={toc} />
+						<TableOfContents headings={toc} variant="desktop" />
 					</aside>
 				)
 			}
+			<div class="min-[1180px]:hidden">
+				<TableOfContents headings={toc} variant="mobile" />
+			</div>
 			<div class:list={['blog', { 'has-drop-cap': post.data.dropCap }]}>
 				<Content />
 			</div>
@@ -110,4 +122,50 @@ const readTime = getReadingTime(post.body ?? '').text;
 			)
 		}
 	</article>
+	<button
+		type="button"
+		id="back-to-top"
+		class="pointer-events-none fixed right-4 bottom-4 z-50 inline-flex h-10 w-10 -translate-y-2 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 opacity-0 shadow-sm transition-all hover:text-brand sm:right-8 sm:bottom-8 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400"
+		aria-label="Back to top"
+		tabindex="-1"
+		inert
+	>
+		<ArrowUp size={18} aria-hidden="true" />
+	</button>
+	<CodeCopyButton />
+	<script>
+		const article = document.getElementById('post-article');
+		const progressBar = document.getElementById('reading-progress');
+		const backToTop = document.getElementById('back-to-top');
+
+		const updateOnScroll = () => {
+			if (article && progressBar) {
+				const articleTop = article.offsetTop;
+				const scrollable = Math.max(article.offsetHeight - window.innerHeight, 1);
+				const scrolled = Math.min(Math.max(window.scrollY - articleTop, 0), scrollable);
+
+				progressBar.style.width = `${(scrolled / scrollable) * 100}%`;
+			}
+
+			if (backToTop) {
+				const visible = window.scrollY > 600;
+
+				backToTop.classList.toggle('opacity-0', !visible);
+				backToTop.classList.toggle('pointer-events-none', !visible);
+				backToTop.classList.toggle('-translate-y-2', !visible);
+				backToTop.toggleAttribute('inert', !visible);
+				backToTop.tabIndex = visible ? 0 : -1;
+			}
+		};
+
+		backToTop?.addEventListener('click', () => {
+			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+			window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+		});
+
+		updateOnScroll();
+		addEventListener('scroll', updateOnScroll, { passive: true });
+		addEventListener('resize', updateOnScroll, { passive: true });
+	</script>
 </Base>

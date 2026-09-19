@@ -1,0 +1,82 @@
+---
+---
+
+<template id="code-copy-template">
+	<button type="button" class="code-copy-btn" aria-label="Copy code">
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 24 24"
+			width="14"
+			height="14"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			class="copy-icon"
+			aria-hidden="true"
+		>
+			<rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+			<path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+		</svg>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 24 24"
+			width="14"
+			height="14"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			class="check-icon"
+			aria-hidden="true"
+		>
+			<path d="M20 6 9 17l-5-5"></path>
+		</svg>
+	</button>
+</template>
+
+<div id="code-copy-status" class="sr-only" role="status" aria-live="polite"></div>
+
+<script>
+	const template = document.getElementById('code-copy-template') as HTMLTemplateElement | null;
+	const liveRegion = document.getElementById('code-copy-status');
+
+	document.querySelectorAll('pre.astro-code').forEach((pre) => {
+		if (!template || pre.querySelector('.code-copy-btn')) {
+			return;
+		}
+
+		pre.classList.add('code-block');
+
+		const button = template.content.cloneNode(true).firstElementChild as HTMLButtonElement;
+		pre.appendChild(button);
+
+		button.addEventListener('click', async () => {
+			const code = pre.querySelector('code');
+
+			if (!code) {
+				return;
+			}
+
+			try {
+				await navigator.clipboard.writeText(code.innerText);
+				button.classList.add('copied');
+				button.setAttribute('aria-label', 'Copied!');
+
+				if (liveRegion) {
+					liveRegion.textContent = 'Code copied to clipboard';
+				}
+			} catch (error) {
+				console.error('Failed to copy code block.', error);
+				return;
+			}
+
+			setTimeout(() => {
+				button.classList.remove('copied');
+				button.setAttribute('aria-label', 'Copy code');
+			}, 1500);
+		});
+	});
+</script>
