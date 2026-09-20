@@ -1,0 +1,170 @@
+---
+title: "Let's talk about AI code reviews"
+date: '2026-09-20T01:32:25.433Z'
+description: 'Why code review has become one of the most important skills for using coding agents without surrendering technical judgment.'
+slug: 'lets-talk-about-ai-code-reviews'
+dropCap: true
+draft: false
+---
+
+I like to complain. And if you have read this blog (or my other writings) for any amount of time, that probably isn't news. Some of my favorite things to ~~rant~~ write about start with something annoying me enough that I need to work out why.
+
+Code review is the thing annoying me right now.
+
+More specifically, I'm getting frustrated with putting real time and thought into reviewing somebody's code, only to receive a response that addresses the words in my comment without addressing the concern.
+
+And yes, this is about AI.
+
+At the same time, I think code review has become more important because of AI, not less. The same habits I use to review another person's pull request are the habits I use to steer an agent:
+
+1. inspect the diff
+1. question what looks *off*, like what a test is actually trying to prove
+1. push back before a questionable choice becomes part of the codebase
+
+Like a lot of things that are AI-generated, I can't possibly know how every code change or comment reply was produced, and I don't want to pretend otherwise. People wrote long pull request descriptions and review replies before ChatGPT, too, and people have always accepted suggestions without fully understanding them. I've done both.
+
+I've reviewed a lot of code before the current AI frenzy, and over time I built up a rough sense of how different people approach a problem. I could often infer something about that approach from the shape of a pull request. That sense has become much less useful these days. I can now open a pull request with polished commits, several description sections, and a validation checklist that repeats the CI check, then find a code comment explaining the next line or a test for a state the application can't reach. These are all just patterns that AI likes.
+
+The funny part is that I like structured commits and useful descriptions. I've advocated for them for years and tried to get my coworkers to use [Conventional Commits](https://www.conventionalcommits.org/), with limited success. I suppose agents loving them proves I was right all along, which is nice.
+
+## Why I care so much about code reviews
+
+My first job out of college gave me a strong taste of the importance and necessity of detailed code review. I was on the receiving end of things and was questioned on every single change I introduced. And yeah, at times it felt like a personal attack.
+
+I don't recall enjoying that whole process, and I definitely remember wanting to get some things resolved ASAP so that I could move on. But those reviews were one of the main ways I learned how production code differed from the code I had written for school or personal projects.
+
+I can't point to one magical comment that changed how I write code today. It was really the repetition of reviewers questioning another abstraction, pointing out that a value already existed somewhere else, or asking what happened when an API returned something unexpected. Those comments came while the code was still fresh in my mind, which made the feedback concrete and easier to apply.
+
+This is also why code reviews have often worked better for me as a knowledge sharing tool than a presentation about a library or a new web API could ever be. I've sat through presentations where I understood every sentence but still didn't know when I would use the thing being described.
+
+In a pull request, the problem is already in front of us. A short explanation about a browser behavior, testing pattern, or repository convention has somewhere to concretely latch onto, and the next person who reads the thread can learn from the same context.
+
+This is why I've developed such a detailed review style myself. I'm not only looking for whether the code compiles. I ask things like:
+
+- Why is this needed?
+- Was the linting failing before this change?
+- Could we use the existing render helper here?
+- Instead of the test ID, could we query by role and accessible name?
+- These blocks appear to represent the same behavior and change for the same reason. Could we consolidate the implementation?
+
+These are real patterns from my reviews. Some are tiny cleanups, and some are genuine questions where the answer could change my mind.
+
+I tend to leave one representative comment instead of repeating it five times. If the author understands the change, that comment should resonate.
+
+- “This appears in several tests; could we apply the same cleanup throughout this file?” is much fairer than expecting the author to guess that one local comment represents a broader request.
+
+- “Could we query by role and accessible name?” is easier to act on than “improve this test.”
+
+- “Could we use the existing render helper?” gives the author somewhere to look.
+
+This is the mindset of **show me, don't just tell me**.
+
+Of course, there is a risk that I end up doing the *interesting part* of the work for somebody else. I've thought about that boundary often since working as a teaching assistant in college and later as a section leader for Code in Place.
+
+I believe the struggle is part of how programming concepts stick. The moment when something finally clicks gives the idea somewhere to attach in your memory. I remember struggling to understand the difference between `for`, `while`, and `do...while` loops, and when I should use each one. Having to work through that confusion was what made the distinction meaningful.
+
+When a student was stuck, giving them the finished solution would help with their current problem set but take away the chance to reach that understanding themselves. A more useful intervention was usually one concrete hint and enough room for them to connect it to the code and work out the answer.
+
+Now, a coworker isn't my student and doesn't owe me a visible learning moment, but the principle still carries over: I don't want to spoon-feed the answer when a question such as “why does this wrapper exist?” can prompt someone to examine the context and reason through it. I've even used AI to phrase comments so they provide enough direction to encourage that reasoning without becoming vague.
+
+Now an author can paste the review into an AI session and say, “Deal with these comments for me.” The agent can change the code, add tests, and write a confident response for every thread without showing that the author understood the concern or that the result fits the rest of the application.
+
+That is why I've been feeling dejected about code reviews lately: I spend time explaining a problem, the thread closes, and nobody necessarily learns from it. That is what makes the effort feel wasted.
+
+## I use AI to review and write code too
+
+There is an obvious hypocrisy to address here. I use AI for code review and for writing most of my code at work today.
+
+Late last year, I basically *mined* the thousands of code review comments I've authored over the years into a skill. I encoded the things I tend to question: unused code, comments that restate the implementation, weak test assertions, unnecessary wrappers, duplicate utilities, dependency churn, accessibility issues, and the long list of small things I've apparently complained about for years.
+
+The skill has worked well as a first pass. It can scan a large pull request and find the sort of issues I would likely notice. Sometimes it catches something before I do. Other times it produces a comment that technically resembles me but misses why I would have cared. I've updated it over time to improve its accuracy, but it still misses the mark. That reinforces that AI can predict my patterns without encoding my judgment.
+
+A common example is comments in code. The skill knows I often ask to remove a comment that simply restates the implementation, so it can become overconfident about removing comments in general. I still have to check whether the comment is recording a workaround or a constraint that the code can't explain. It learned the surface pattern from me, not necessarily my reason.
+
+I usually don't let the agent post comments on my behalf. I've tried variations of that workflow, and it felt inauthentic. If a comment appears under my name, I want it to be something I actually believe and can defend. Lately, though, I've been making more exceptions because I'm becoming fed up with genuine comments being answered by agents. It makes the time I spend doing a careful review feel wasted.
+
+My current process is closer to two reviews happening in tandem. I have the agent inspect the change using the skill while I read the pull request and form my own view. Then I compare the results.
+
+That comparison helps me see where my own review is incomplete. I may notice something based on product or repository history that the agent didn't have, while it traces a code path I hadn't finished following. Sometimes one of us raises a concern and the other helps test whether it's real.
+
+This is how I review pull requests, including my own AI-assisted changes. Many of my comments begin as exploratory questions. I might see a dependency being bumped and ask why the change is needed or whether every consumer is ready for the new major version. The agent can search the repositories and package manifests before I ask. If I see two similar test blocks, it can trace whether they really exercise the same path. That is the version of AI-assisted review I like: the agent researches and traces, while I decide whether there is a comment worth another person's time. Before AI, I did less of that tracing because it was time-consuming; I was more likely to ask the author a “dumb question” instead.
+
+I also notice the temptation in my own workflow. When the review skill comes back with no findings, there is a brief feeling of relief. It would be easy to turn that into *nothing to see here* and read the rest less carefully. That is exactly why I still form my own view before comparing notes with the agent.
+
+The more I use agents, the more I think being good at code review is also part of being good at building with them. The mechanics overlap more than I expected.
+
+An agent comes back with a diff.
+
+- I need to understand what it changed, compare it with what I asked for, question the parts that look unusual, and decide whether the tests prove the behavior.
+- If it introduces another helper instead of reusing the one already in the repository, I point it at the existing helper.
+- If it adds a comment that repeats the next line, I ask it to remove the comment and improve the name.
+- If the test only proves that a method was called, I ask what values reached the method.
+
+That is a code review.
+
+The agent responds in seconds, which makes another review round cheaper. It also brings different failure modes: incomplete context, nondeterministic output, and tests generated from the same assumptions as the implementation. I can't rely on social context or expect it to notice the organizational constraint I never wrote down.
+
+This is also why I don't think the answer is to become less particular because an agent wrote the first version.
+
+- The agent will keep building on whatever I accept. If I approve an unnecessary abstraction in the first iteration, the next iteration may add another layer around it.
+- If I accept a weak test, the agent now has that test as an example of what “done” looks like.
+- If I let it duplicate a utility, both versions are available as patterns the next time it searches the repository.
+
+The drift is rarely dramatic. It's one plausible choice becoming context for the next, until the agent has produced a larger and internally consistent version of the wrong direction. I've watched this happen in my own sessions. The first patch is close enough that I say “continue” instead of stopping to clean up the structure. The next prompt assumes the structure is intentional. By the time I object, the agent has touched more files, added tests around the new shape, and written a summary explaining why the whole thing makes sense. Undoing it is now more work than reviewing the first diff properly would have been.
+
+Agents can do the typing and a surprising amount of the investigation.
+
+I still have to steer the work.
+
+For me, steering looks a lot like the review habits I learned before agents existed: ask why, look for the existing pattern, check the behavior instead of the description, and push back before a small questionable choice turns into the architecture or source of truth.
+
+That's why I believe the time I spent learning how to review code wasn't made obsolete by AI. It may be the part of coding that transfers most directly.
+
+## Code review is the bottleneck
+
+There is another uncomfortable part of this. In the work I'm seeing, pull requests are getting bigger and arriving more often. An agent can produce in an afternoon what might have taken somebody several days before AI, but all of that code still has to pass through the same review process.
+
+Code review is one of the last quality gates before a change becomes everybody's problem. That makes it more important to move deterministic checks into linters, builds, and tests. Formatting, focused tests, dead code, duplication, type errors, architectural boundaries, and changed-line coverage are all things tooling can surface consistently, and those signals can help both people and agents.
+
+Human review is still needed for the issues that aren't deterministic. Linters, builds, and tests can't tell us whether the change solves the right problem, fits the surrounding design, or introduces an assumption that will surprise us six months down the road.
+
+Different reviewers naturally notice different things.
+
+- I tend to focus on tests, unnecessary abstractions, repeated patterns, accessibility, and whether the change follows the direction of the surrounding code.
+- Somebody closer to the service may notice that an API assumption is wrong.
+- Somebody who works in the feature every day may see that the flow makes no sense for the user, while another reviewer catches a deployment concern I would never have thought to look for.
+
+That variety still matters even when an agent is asked to review its own work adversarially. The implementation and the review may challenge each other, but they're still generated from similar context and can leave the same gaps untouched. Fresh context doesn't solve this; it's like asking the same agent the same question twice and getting different answers.
+
+Manually reading every line of every growing pull request isn't a serious plan either. The review queue grows, authors wait longer, and my attention gets worse as I move from one large PR to the next. Eventually I'm scanning instead of reviewing, which only creates the appearance of a human quality gate.
+
+An agent can do a useful first pass over the larger diff, trace code paths, and point reviewers toward areas that deserve another look. Human attention should stay on behavior, API contracts, design choices, and whether the result will still make sense after the original coding session is gone.
+
+I also think this means we have to push harder on pull request size.
+AI makes it easy to keep saying “while you are here, clean this up too” until one change contains the feature, the refactor, the dependency upgrade, new tests, and a small redesign nobody originally asked for. And the fact that an agent can produce that diff quickly doesn't make it quick to understand.
+
+Smaller pull requests are not always possible, and splitting a change badly can make the sequence harder to follow. Stacked pull requests can help when each change has a clear purpose and builds on the previous one, giving reviewers a smaller unit to understand without losing the overall context. When each part also has independent evidence, reviewers have a better chance to form a real opinion instead of rubber-stamping a pile of plausible code.
+
+I feel like manual review can't scale exactly as it worked before AI. The balance I've settled on is to automate repeatable checks, use agents to increase reviewer reach, keep changes understandable, and preserve the places where another person's judgment can still change the result.
+
+## Cognitive surrender
+
+Addy Osmani wrote about [cognitive surrender](https://addyosmani.com/blog/cognitive-surrender/), drawing on a [2026 working paper by Steven Shaw and Gideon Nave](https://ssrn.com/abstract=6097646). The distinction is between using AI to assist your judgment and accepting its answer without forming your own view first.
+
+Code review is an easy place for that surrender to happen for both authors and reviewers. A large PR can make it difficult to reconstruct what changed, why it changed, and where to begin. An author can accept the agent's summary of what it built, and a reviewer can accept the agent's summary of what it found. I notice the same pull in my own workflow when a review skill reports no findings. I have to remind myself that the summary is something to check, not a substitute for understanding the change.
+
+That is the skill-atrophy concern for me, regardless of how experienced I am: if I stop working through difficult changes, I lose the judgment that comes from understanding code, systems, and how things actually work.
+
+I'm also curious about engineers who enter the industry having only ever written code beside an agent. They may develop strong system instincts through a different path, and I don't want to pretend my way of learning is the only legitimate one. I just don't think we should remove every chance to debug, disagree, and work through a bad idea before we know what replaces that experience.
+
+## What review needs now
+
+I don't need somebody to type every character by hand or confess which lines came from an agent; I need the name on the pull request to mean the author can own the result.
+
+If I ask why a new helper exists beside an old one, I want to learn the difference or see them consolidated, and I don't care whether an agent traced the callers.
+
+I also want the author to disagree when I'm wrong, because a good review isn't me publishing an answer key.
+
+What I want is simpler: make the concern clear, show where it appears, and keep the change small enough that another person can reason about it.
+
+**Show me, don't tell me** matters more literally now. Show me the assertion. Show me the second caller. Show me why the abstraction needs to exist.
