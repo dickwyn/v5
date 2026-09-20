@@ -69,6 +69,14 @@ const readTime = getReadingTime(post.body ?? '').text;
 			)}
 			<div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-neutral-600 dark:text-neutral-400">
 				<time datetime={post.data.date}>{formatDate(post.data.date)}</time>
+				{post.data.updated && (
+					<>
+						<span class="text-neutral-400 dark:text-neutral-600" aria-hidden="true">·</span>
+						<span>
+							Updated <time datetime={post.data.updated}>{formatDate(post.data.updated)}</time>
+						</span>
+					</>
+				)}
 				<span class="text-neutral-400 dark:text-neutral-600" aria-hidden="true">·</span>
 				<span>{readTime}</span>
 				<span class="text-neutral-400 dark:text-neutral-600" aria-hidden="true">·</span>

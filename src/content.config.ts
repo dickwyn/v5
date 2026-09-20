@@ -1,12 +1,14 @@
-import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { defineCollection } from 'astro:content';
 
+import { gitDatedGlob } from './loaders/git-dated-glob';
+
 const blog = defineCollection({
-    loader: glob({ pattern: '**/*.mdx', base: './src/content/blog' }),
+    loader: gitDatedGlob({ pattern: '**/*.mdx', base: './src/content/blog' }),
     schema: z.object({
         title: z.string(),
-        date: z.string(),
+        date: z.string().default(''),
+        updated: z.string().optional(),
         description: z.string().optional(),
         slug: z.string(),
         subtitle: z.string().optional(),
