@@ -7,8 +7,27 @@ import { glob } from 'astro/loaders';
 
 type GlobOptions = Parameters<typeof glob>[0];
 
+interface GitCommit {
+    hash: string;
+    date: string;
+}
+
+const getPostBody = (revision: string, filePath: string, cwd: string) => {
+    const content = execFileSync('git', ['show', `${revision}:${filePath}`], {
+        cwd,
+        encoding: 'utf8',
+    });
+    const frontmatterEnd = content.indexOf('\n---', 3);
+
+    return frontmatterEnd === -1 ? content : content.slice(frontmatterEnd + 4);
+};
+
+const hasMeaningfulBodyChange = (commit: GitCommit, filePath: string, cwd: string) =>
+    getPostBody(`${commit.hash}^`, filePath, cwd).replaceAll(/\s/g, '') !==
+    getPostBody(commit.hash, filePath, cwd).replaceAll(/\s/g, '');
+
 const getGitDates = (filePath: string, cwd: string) => {
-    const output = execFileSync('git', ['log', '--follow', '--format=%cI', '--', filePath], {
+    const output = execFileSync('git', ['log', '--follow', '--format=%H%x09%cI', '--', filePath], {
         cwd,
         encoding: 'utf8',
     }).trim();
@@ -17,11 +36,17 @@ const getGitDates = (filePath: string, cwd: string) => {
         return undefined;
     }
 
-    const commits = output.split('\n');
+    const commits = output
+        .split('\n')
+        .map((line) => line.split('\t'))
+        .map(([hash, date]) => ({ hash, date }));
+    const updatedCommit = commits
+        .slice(0, -1)
+        .find((commit) => hasMeaningfulBodyChange(commit, filePath, cwd));
 
     return {
-        published: commits.at(-1),
-        updated: commits.length > 1 ? commits[0] : undefined,
+        published: commits.at(-1)?.date,
+        updated: updatedCommit?.date,
     };
 };
 
@@ -48,7 +73,7 @@ export const gitDatedGlob = (options: GlobOptions) => {
                 let gitDates: ReturnType<typeof getGitDates>;
 
                 try {
-                    gitDates = getGitDates(filePath, rootPath);
+                    gitDates = getGitDates(entry.filePath, rootPath);
                 } catch (error) {
                     throw new Error(`Failed to read Git history for blog entry "${id}".`, {
                         cause: error,
