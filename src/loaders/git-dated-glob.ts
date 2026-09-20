@@ -62,7 +62,7 @@ export const gitDatedGlob = (options: GlobOptions) => {
 
             const rootPath = fileURLToPath(context.config.root);
 
-            for (const [id, entry] of context.store.entries()) {
+            for (const [id, entry] of Array.from(context.store.entries())) {
                 if (entry.filePath === undefined) {
                     throw new Error(
                         `Cannot determine Git dates for blog entry "${id}" without a file path.`
