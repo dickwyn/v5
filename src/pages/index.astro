@@ -1,36 +1,139 @@
 ---
+import { getCollection } from 'astro:content';
+import { ArrowUpRight, ArrowRight } from '@lucide/astro';
 import Base from '../layouts/Base.astro';
+import { formatDate } from '../utils';
+
+const posts = (await getCollection('blog'))
+	.filter((post) => !post.data.draft)
+	.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+	.slice(0, 2);
 ---
 
-<Base>
-	<section>
-		<h1 class="mb-5 text-3xl">
-			hi, i'm <b>dickwyn</b>
-		</h1>
-		<section class="grid gap-4">
-			<p>
-				i'm a software engineer passionate about creating secure and delightful web
-				experiences. at <a href="https://microsoft.com" target="_blank" rel="noopener noreferrer">Microsoft</a>,
-				i focus on developing fraud protection solution that help protect the company's digital
-				ecosystem.
-			</p>
-			<p>
-				i was born and raised in <a href="https://www.malaysia.travel" target="_blank" rel="noopener noreferrer">malaysia</a>{' '}
-				and earned my computer science degree from <a href="https://www.asu.edu" target="_blank" rel="noopener noreferrer">arizona state university</a>.
-				i used to share how technology impacts everyday life on my <a
-					href="https://www.youtube.com/dickwyn"
-					target="_blank"
-					rel="noopener noreferrer"
-				>youtube</a>{' '}
-				channel, documenting my journey through the intersection of tech and daily
-				experiences.
-			</p>
-			<p>
-				beyond work, i'm currently into weightlifting and running as i train my way to a full
-				marathon. my other interests include formula 1, airplanes, credit cards, photography,
-				videography, traveling, and trying out new food spots - basically anything that mixes
-				curiosity with a bit of adventure.
-			</p>
+<Base wide>
+	<div class="home">
+		<section aria-labelledby="intro" class="hero grid items-center gap-8 border-t border-neutral-200 pt-10 pb-12 sm:grid-cols-[1fr_auto] sm:gap-12 sm:pt-14 sm:pb-16 dark:border-neutral-800">
+			<div>
+				<p class="eyebrow mb-5">software engineer. curious by default.</p>
+				<h1 id="intro" class="font-serif text-[clamp(3.5rem,8vw,5.5rem)] leading-[1.08] tracking-[-0.065em]">
+					hi, i'm<br />
+					<span class="text-brand">dickwyn.</span>
+				</h1>
+				<p class="mt-6 max-w-md text-lg leading-relaxed text-neutral-600 dark:text-neutral-300">
+					building secure, delightful web experiences.<br class="hidden sm:block" />{' '}
+					exploring everything in between.
+				</p>
+				<a href="/blog" class="mt-7 inline-flex min-h-11 items-center gap-3 font-medium no-underline!">
+					read my writing <ArrowRight size={18} aria-hidden="true" />
+				</a>
+			</div>
+			<figure class="portrait relative mr-3 w-40 justify-self-start sm:w-52">
+				<img
+					src="/images/dick-wyn-yong.jpg"
+					alt="Dickwyn smiling at his Arizona State University graduation"
+					width="947"
+					height="934"
+					fetchpriority="high"
+					class="relative z-10 aspect-[4/5] w-full rounded-t-full object-cover"
+				/>
+				<figcaption class="eyebrow mt-5 text-center">a little bit about me</figcaption>
+			</figure>
 		</section>
-	</section>
+
+		<section aria-label="About me" class="border-t border-neutral-200 dark:border-neutral-800">
+			<div class="about-row">
+				<h2 class="eyebrow"><span aria-hidden="true" class="mr-4 text-brand">01</span>what i do</h2>
+				<p>
+					i'm a software engineer at <a href="https://microsoft.com" target="_blank" rel="noopener noreferrer">Microsoft</a>,
+					developing fraud protection solutions that help protect the company's digital ecosystem.
+				</p>
+			</div>
+			<div class="about-row">
+				<h2 class="eyebrow"><span aria-hidden="true" class="mr-4 text-brand">02</span>where i'm from</h2>
+				<p>
+					born and raised in <a href="https://www.malaysia.travel" target="_blank" rel="noopener noreferrer">malaysia</a>.
+					computer science grad from <a href="https://www.asu.edu" target="_blank" rel="noopener noreferrer">arizona state university</a>.
+					i used to document the intersection of tech and everyday life on <a href="https://www.youtube.com/dickwyn" target="_blank" rel="noopener noreferrer">youtube</a>.
+				</p>
+			</div>
+			<div class="about-row">
+				<h2 class="eyebrow"><span aria-hidden="true" class="mr-4 text-brand">03</span>off the clock</h2>
+				<p>
+					weightlifting and running, with a full marathon in sight. also: formula 1, airplanes,
+					credit cards, photography, videography, traveling, and new food spots.
+					anything that mixes curiosity with a bit of adventure.
+				</p>
+			</div>
+		</section>
+
+		{
+			posts.length > 0 && (
+				<section aria-labelledby="writing" class="mt-12">
+					<div class="mb-4 flex items-center justify-between gap-4">
+						<h2 id="writing" class="font-serif text-2xl tracking-tight">recent writing</h2>
+						<a href="/blog" class="inline-flex min-h-11 items-center gap-2 text-sm no-underline!">
+							all posts <ArrowRight size={16} aria-hidden="true" />
+						</a>
+					</div>
+					<div class="grid gap-4 sm:grid-cols-2">
+						{posts.map((post) => (
+							<a href={`/blog/${post.data.slug}`} class="flex flex-col border border-neutral-200 p-6 no-underline! transition-colors hover:border-brand hover:bg-(--color-brand-hover) dark:border-neutral-800">
+								<time datetime={post.data.date} class="eyebrow">{formatDate(post.data.date)}</time>
+								<h3 class="mt-3 font-serif text-xl leading-snug tracking-tight text-neutral-900 dark:text-neutral-100">{post.data.title}</h3>
+								<span class="mt-auto flex justify-end pt-5 text-brand">
+									<ArrowUpRight size={20} aria-hidden="true" />
+								</span>
+							</a>
+						))}
+					</div>
+				</section>
+			)
+		}
+	</div>
 </Base>
+
+<style>
+	@reference '../styles/global.css';
+
+	.eyebrow {
+		@apply font-mono text-[0.6875rem] leading-relaxed tracking-wider text-neutral-500 dark:text-neutral-400;
+	}
+
+	.about-row {
+		@apply grid gap-3 border-b border-neutral-200 py-7 sm:grid-cols-[13rem_1fr] sm:gap-8 dark:border-neutral-800;
+	}
+
+	.about-row p {
+		@apply max-w-xl leading-relaxed text-neutral-700 dark:text-neutral-300;
+	}
+
+	.portrait::before {
+		content: '';
+		position: absolute;
+		inset: -10px -10px 38px 10px;
+		border: 1px solid var(--color-brand);
+		border-radius: 999px 999px 0 0;
+	}
+
+	.home a:focus-visible {
+		outline: 2px solid var(--color-brand);
+		outline-offset: 5px;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.hero {
+			animation: arrive 600ms ease-out both;
+		}
+
+		@keyframes arrive {
+			from {
+				opacity: 0;
+				transform: translateY(10px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+	}
+</style>

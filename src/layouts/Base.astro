@@ -8,6 +8,7 @@ interface Props {
 	title?: string;
 	description?: string;
 	ogImage?: string;
+	wide?: boolean;
 }
 
 const siteName = 'Dickwyn Yong';
@@ -15,7 +16,7 @@ const siteDescription =
 	'Dickwyn is a software engineer and content creator. He is a Malaysian living in America and enjoys experimenting with new recipes in the kitchen and geeking out on the latest tech gadgets.';
 const baseUrl = 'https://dickwyn.com';
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, wide = false } = Astro.props;
 const pageTitle = title ? `${title} | ${siteName}` : siteName;
 const pageDescription = description || siteDescription;
 const resolvedOgImage = ogImage || `${baseUrl}/og-default.png`;
@@ -67,7 +68,7 @@ const canonicalUrl = new URL(Astro.url.pathname, baseUrl).href;
 			data-domains="www.dickwyn.com"
 		></script>
 	</head>
-	<body class="antialiased max-w-xl mx-4 mt-8 lg:mx-auto">
+	<body class:list={['antialiased mx-4 mt-8 lg:mx-auto', wide ? 'max-w-4xl' : 'max-w-xl']}>
 		<main class="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
 			<Nav />
 			<slot />

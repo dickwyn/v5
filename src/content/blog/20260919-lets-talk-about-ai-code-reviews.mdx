@@ -18,7 +18,7 @@ And yes, this is about AI.
 At the same time, I think code review has become more important because of AI, not less. The same habits I use to review another person's pull request are the habits I use to steer an agent:
 
 1. inspect the diff
-1. question what looks *off*, like what a test is actually trying to prove
+1. question what looks _off_, like what a test is actually trying to prove
 1. push back before a questionable choice becomes part of the codebase
 
 Like a lot of things that are AI-generated, I can't possibly know how every code change or comment reply was produced, and I don't want to pretend otherwise. People wrote long pull request descriptions and review replies before ChatGPT, too, and people have always accepted suggestions without fully understanding them. I've done both.
@@ -59,7 +59,7 @@ I tend to leave one representative comment instead of repeating it five times. I
 
 This is the mindset of **show me, don't just tell me**.
 
-Of course, there is a risk that I end up doing the *interesting part* of the work for somebody else. I've thought about that boundary often since working as a teaching assistant in college and later as a section leader for Code in Place.
+Of course, there is a risk that I end up doing the _interesting part_ of the work for somebody else. I've thought about that boundary often since working as a teaching assistant in college and later as a section leader for Code in Place.
 
 I believe the struggle is part of how programming concepts stick. The moment when something finally clicks gives the idea somewhere to attach in your memory. I remember struggling to understand the difference between `for`, `while`, and `do...while` loops, and when I should use each one. Having to work through that confusion was what made the distinction meaningful.
 
@@ -75,7 +75,7 @@ That is why I've been feeling dejected about code reviews lately: I spend time e
 
 There is an obvious hypocrisy to address here. I use AI for code review and for writing most of my code at work today.
 
-Late last year, I basically *mined* the thousands of code review comments I've authored over the years into a skill. I encoded the things I tend to question: unused code, comments that restate the implementation, weak test assertions, unnecessary wrappers, duplicate utilities, dependency churn, accessibility issues, and the long list of small things I've apparently complained about for years.
+Late last year, I basically _mined_ the thousands of code review comments I've authored over the years into a skill. I encoded the things I tend to question: unused code, comments that restate the implementation, weak test assertions, unnecessary wrappers, duplicate utilities, dependency churn, accessibility issues, and the long list of small things I've apparently complained about for years.
 
 The skill has worked well as a first pass. It can scan a large pull request and find the sort of issues I would likely notice. Sometimes it catches something before I do. Other times it produces a comment that technically resembles me but misses why I would have cared. I've updated it over time to improve its accuracy, but it still misses the mark. That reinforces that AI can predict my patterns without encoding my judgment.
 
@@ -89,7 +89,7 @@ That comparison helps me see where my own review is incomplete. I may notice som
 
 This is how I review pull requests, including my own AI-assisted changes. Many of my comments begin as exploratory questions. I might see a dependency being bumped and ask why the change is needed or whether every consumer is ready for the new major version. The agent can search the repositories and package manifests before I ask. If I see two similar test blocks, it can trace whether they really exercise the same path. That is the version of AI-assisted review I like: the agent researches and traces, while I decide whether there is a comment worth another person's time. Before AI, I did less of that tracing because it was time-consuming; I was more likely to ask the author a “dumb question” instead.
 
-I also notice the temptation in my own workflow. When the review skill comes back with no findings, there is a brief feeling of relief. It would be easy to turn that into *nothing to see here* and read the rest less carefully. That is exactly why I still form my own view before comparing notes with the agent.
+I also notice the temptation in my own workflow. When the review skill comes back with no findings, there is a brief feeling of relief. It would be easy to turn that into _nothing to see here_ and read the rest less carefully. That is exactly why I still form my own view before comparing notes with the agent.
 
 The more I use agents, the more I think being good at code review is also part of being good at building with them. The mechanics overlap more than I expected.
 
